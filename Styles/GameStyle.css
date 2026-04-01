@@ -1,0 +1,190 @@
+@font-face { 
+    font-family: NeueHaasDisplayMedium;
+    src: url(../Assets/Fonts/NeueHaasDisplayMedium.ttf);
+}
+
+@font-face {
+    font-family: NeueHaasDisplayRoman;
+    src: url(../Assets/Fonts/NeueHaasDisplayRoman.ttf);
+}
+
+/* Game page background */
+body {
+    background-color: rgb(0, 9, 24);
+    background-repeat: no-repeat;
+    margin: 0px;
+    padding: 0px;
+}
+
+/* Main content area */
+main {
+    scroll-margin-top: 55px;
+    margin-top: 55px;
+    display: flex;
+    flex-direction: row;
+    min-height: calc(100vh - 55px);
+
+}
+
+
+main h1 {
+    display: block;
+    max-width: fit-content;
+    font-family: NeueHaasDisplayMedium;
+    color: white;
+    font-size: clamp(30px, 2.5vw, 40px);
+    text-align: left;
+    padding: 0;
+    font-weight: bold;
+    margin: 0;
+
+}
+
+main h2 {
+    display: block;
+    max-width: fit-content;
+    font-family: NeueHaasDisplayMedium;
+    color: white;
+    font-size: clamp(24px, 2vw, 30px);
+    text-align: left;
+    padding: 10px 0;
+    margin: 0;
+
+}
+
+main h3 {
+    display: block;
+    max-width: fit-content;
+    font-family: NeueHaasDisplayMedium;
+    color: white;
+    font-size: clamp(18px, 1.5vw, 24px);
+    text-align: left;
+    background: rgba(1, 1, 1, 0.2);
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin: 0;
+}
+
+/* Game details section */
+.game-details {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 20px;
+    border-right: 2px solid rgb(255, 255, 255);
+}
+
+.game-details img {
+    width: 100%;
+
+    height: auto;
+}
+
+.game-details p {
+    font-family: NeueHaasDisplayRoman;
+    color: white;
+    font-size: clamp(16px, 1.5vw, 20px);
+    line-height: 1.5;
+
+}
+
+/* Purchase section */
+.game-purchase {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 10px;
+    width: 100%;
+    background: linear-gradient(to bottom,
+
+            rgb(1, 69, 141),
+            rgb(0, 57, 122),
+            rgb(0, 45, 102),
+            rgb(0, 29, 82));
+    box-sizing: border-box;
+}
+
+/* Genre tags */
+.genres {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding-top: 10px;
+
+}
+
+
+/* General button style */
+button {
+    background-color: rgb(0, 9, 24);
+    color: white;
+    font-family: NeueHaasDisplayMedium;
+    border: none;
+    padding: 10px 20px;
+    font-size: clamp(16px, 2vw, 20px);
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Purchase buttons */
+.purchase-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+}
+
+/* Disable for PC screens */
+.mobile-only {
+    display: none;
+}
+
+/* Responsive styles */
+@media only screen and (max-width: 768px) {
+
+    main {
+        display:flex;
+        flex-direction: column;
+    }
+
+    .game-details {
+        flex: 1;
+        border-right: none;
+        border-bottom: 2px solid rgb(255, 255, 255);
+        padding:0;
+
+    }
+
+    .pc-only {
+        display: none;
+    }
+
+    .mobile-only {
+        display: block;
+        padding: 20px;
+    }
+
+    .game-details p {
+        padding: 0 20px;
+    }
+
+    main h3{
+        background: rgba(0, 128, 255, 0.4)
+    }
+
+    .game-details img {
+    width: 100%;
+    height: 30vh;
+
+}
+
+}
+
+    
+
+
+

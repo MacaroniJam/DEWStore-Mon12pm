@@ -1,0 +1,214 @@
+@font-face {
+    font-family: NeueHaasDisplayMedium;
+    src: url(../Assets/Fonts/NeueHaasDisplayMedium.ttf);
+}
+
+@font-face {
+    font-family: NeueHaasDisplayRoman;
+    src: url(../Assets/Fonts/NeueHaasDisplayRoman.ttf);
+}
+
+
+/* Register page background */
+body {
+    background-image: radial-gradient(circle,
+          
+
+            rgba(0, 29, 82, 0.8) 60%,
+            rgba(0, 36, 95, 0.75) 65%,
+            rgba(0, 44, 102, 0.7) 70%,
+            rgba(0, 50, 112, 0.68) 75%,
+            rgba(0, 57, 122, 0.65) 80%,
+            rgba(1, 63, 132, 0.62) 84%,
+            rgba(1, 69, 141, 0.6) 88%,
+            rgba(2, 75, 150, 0.55) 91%,
+            rgba(2, 79, 161, 0.5) 93%,
+
+            rgba(3, 86, 170, 0.45) 95%,
+            rgba(4, 92, 180, 0.4) 96%,
+            rgba(4, 102, 200, 0.3) 97%,
+            rgba(4, 112, 220, 0.25) 98.5%,
+            rgba(5, 122, 240, 0.2) 100%),
+
+        url('../Assets/Images/VideoGamesCollage.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+
+
+/* Register container */
+.Register {
+    display: flex;
+    flex-direction: row;
+
+    align-items: stretch;
+    background-color: rgb(23, 26, 33);
+    width: 70%;
+    margin-top: 65px;
+
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    
+
+
+}
+
+
+/* Register form */
+#registerForm {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 20px;
+    box-sizing: border-box;
+    padding: 0px 40px;
+}
+
+
+
+input {
+    border: none;
+    background-color: rgb(50, 53, 60);
+    color: white;
+    font-size: 18px;
+    padding: 10px 10px;
+
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+/* Input fields group */
+.inputFields {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Single input field */
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Button group */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 50px;
+    padding-bottom: 30px;
+}
+
+/* Register title */
+.Register h1 {
+    font-family: NeueHaasDisplayMedium;
+    color: white;
+    font-size: clamp(30px, 2.5vw, 40px);
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+label {
+    font-family: NeueHaasDisplayRoman;
+    color: white;
+    font-size: clamp(16px, 2vw, 20px);
+
+}
+
+button {
+    background-color: rgb(0, 122, 255);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: clamp(16px, 2vw, 20px);
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Side image container */
+.sideImage {
+    flex: 1;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 20px;
+
+}
+
+/* Side image */
+.sideImage img {
+    height: auto;
+    display: block;
+
+    width:400px;
+    object-fit: contain;
+    box-sizing: border-box;
+
+
+}
+
+/* Password field with toggle */
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Password input field */
+.password-container input {
+    width: 100%;
+    padding-right: 40px;
+    box-sizing: border-box;
+}
+
+/* Password visibility toggle icon */
+.password-container i {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: gray;
+}
+
+/* Responsive styles */
+@media only screen and (max-width: 768px) {
+    .Register {
+        flex-direction: column;
+        width: 100%;
+
+        padding-bottom: 40px;
+    }
+
+    .Register h1 {
+        text-align: center;
+    }
+
+    .sideImage {
+        display: none;
+    }
+
+    #registerForm {
+        gap: 0;
+    }
+
+    
+
+
+
+}

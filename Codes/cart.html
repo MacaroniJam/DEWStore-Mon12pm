@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>D.E.W Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../Assets/Images/raindrop.png" type="image/x-icon">
+    <link rel="stylesheet" href="../Styles/CartStyle.css" type="text/css">
+    <link rel="stylesheet" href="../Styles/NavBarStyle.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="mainScript.js" defer></script>
+    <script src="cartScript.js" defer></script>
+
+</head>
+
+<body>
+    <header>
+        <div>
+            <img src="../Assets/Images/DEWLogo.png" alt="D.E.W Store Logo">
+            <h1>D.E.W Store</h1>
+
+        </div>
+
+        <nav id="nav-links">
+
+        </nav>
+
+
+    </header>
+
+    <main>
+        <h1>CART</h1>
+        <section class="content">
+            <section class="cart">
+                <div class="cart-items">
+
+                    <!-- Container for cart items -->
+                    <div id="cartContainer"></div>
+
+
+
+
+                </div>
+                <button id="removeAll">Remove all items</button>
+            </section>
+
+            <section class="total-purchase">
+                <h1>Games Summary</h1>
+                <div>
+                    <h2>Total</h2>
+                    <h2><span id="totalPrice">$0.00</span></h2>
+                </div>
+
+                <button id="checkoutButton" onclick="window.location.href='checkout.html'">Checkout</button>
+
+            </section>
+
+
+        </section>
+
+    </main>
+
+
+
+</body>
+
+</html>

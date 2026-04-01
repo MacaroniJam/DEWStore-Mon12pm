@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>D.E.W Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../Assets/Images/raindrop.png" type="image/x-icon">
+    <link rel="stylesheet" href="../Styles/GameStyle.css" type="text/css">
+    <link rel="stylesheet" href="../Styles/NavBarStyle.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="mainScript.js" defer></script>
+    <script src="gameScript.js" defer></script>
+
+</head>
+
+<body>
+    <header>
+        <div>
+            <img src="../Assets/Images/DEWLogo.png" alt="D.E.W Store Logo">
+            <h1>D.E.W Store</h1>
+
+        </div>
+
+        <nav id="nav-links">
+
+        </nav>
+
+
+    </header>
+
+    <main>
+        <section class="game-details">
+            <img src="../Assets/Images/COE33Promo.jpg" alt="Clair Obscur: Expedition 33 Cover Image">
+
+            <!-- To move div position in mobile view by turning off the display of the pc only elements and turning on the mobile-only elements -->
+            <div class="mobile-only">
+                <h1><span id="gameTitleMobile">Game Title</span></h1>
+                <div class="genres">
+                    <h3><span id="genre1Mobile">Genre 1</span></h3>
+                    <h3><span id="genre2Mobile">Genre 2</span></h3>
+                    <h3><span id="genre3Mobile">Genre 3</span></h3>
+                </div>
+
+            </div>
+
+            <p><span id="gameDescription">Game Description</span></p>
+
+        </section>
+
+        <section class="game-purchase">
+            <div class="pc-only">
+                <h1><span id="gameTitleDesktop">Game Title</span></h1>
+                <div class="genres">
+                    <h3><span id="genre1Desktop">Genre 1</span></h3>
+                    <h3><span id="genre2Desktop">Genre 2</span></h3>
+                    <h3><span id="genre3Desktop">Genre 3</span></h3>
+                </div>
+
+            </div>
+
+
+
+            <div class="purchase-actions">
+                <h1><span id="gamePrice">$XX.XX</span></h1>
+                <button id="CartButton">Add to Cart</button>
+                <button id="ViewCartButton" onclick="window.location.href = 'cart.html'">View Cart</button>
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+
+</body>
+
+</html>

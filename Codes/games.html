@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>D.E.W Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../Assets/Images/raindrop.png" type="image/x-icon">
+    <link rel="stylesheet" href="../Styles/GamesStyle.css" type="text/css">
+    <link rel="stylesheet" href="../Styles/NavBarStyle.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="mainScript.js" defer></script>
+    <script src="gamesScript.js" defer></script>
+
+</head>
+
+<body>
+    <header>
+        <div>
+            <img src="../Assets/Images/DEWLogo.png" alt="D.E.W Store Logo">
+            <h1>D.E.W Store</h1>
+
+        </div>
+
+        <nav id="nav-links">
+
+        </nav>
+
+
+    </header>
+
+    <main>
+        <h1>GAMES</h1>
+        <section class="GameShowcase">
+            <div class="Promotion">
+                <img id="GameSlide" src="../Assets/Images/COE33Promo.jpg" alt="Promotional Image">
+                <div class="OverlayContent">
+                    <img id="logo" src="../Assets/Images/COE33Logo.png" alt="D.E.W Store Logo">
+                    <p> Promotional Text</p>
+                    <button id="playButton">Play Now</button>
+                </div>
+            </div>
+
+            <div class="image-selector">
+                <input type="radio" name="slide" id="slide1" checked>
+                <label for="slide1"></label>
+
+                <input type="radio" name="slide" id="slide2">
+                <label for="slide2"></label>
+
+                <input type="radio" name="slide" id="slide3">
+                <label for="slide3"></label>
+            </div>
+        </section>
+
+        <h2>All Games</h2>
+        <!-- Games grid will be filled with games from database using JavaScript -->
+        <section class="games-grid">
+        </section>
+
+    </main>
+
+
+
+</body>
+
+</html>
