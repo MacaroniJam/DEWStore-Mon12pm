@@ -32,7 +32,7 @@
         <h1>CHECKOUT</h1>
 
         <section class=content>
-            <section class="purchase pc-only">
+            <section class="purchase pc-only" onchange="toggleForm()">
                 <h1>Payment Information</h1>
                 <select id="paymentMethodDesktop">
                     <option value="" disabled selected hidden>Select Payment Method</option>
@@ -40,6 +40,130 @@
                     <option value="creditCard">Credit Card</option>
                     <option value="paypal">PayPal</option>
                 </select>
+                
+                <form id="creditCardForm"  style="display: none;">
+                    <h1>Credit Card Information</h1>
+                    <div class ="inputFields">
+                        <div class="field">
+                            <label>Name as on Card</label>
+                            <input type="text" id="name" placeholder="Name as on Card" required>
+
+                        </div>
+                                
+                        <div class="field">
+                            <label>Card Billing Address</label>
+                            <input type="text" id="cardBillingAddress" placeholder="Card Billing Address" required>
+
+                        </div>
+
+                         <div class="field">
+                            <label>Card Billing Zip</label>
+                            <input type="text" id="cardBillingZip" placeholder="Card Billing Zip" required>
+
+                        </div>
+
+                        <div class="field">
+                            <label>Card Billing Number</label>
+                            <input type="text" id="cardBillingNumber" placeholder="Card Billing Number" required>
+
+                        </div>
+                        
+                        <div class="field">
+                            <label>Card Expiration Date</label>
+                            <input type="text" id="cardExpirationDate" placeholder="Card Expiration Date" required>
+
+                        </div>
+
+                        <div class="field">
+                            <label>Payment Amount</label>
+                            <input type="text" id="amountTotal" placeholder="Enter the amount to be paid" required>
+
+                        </div>
+
+                        <div class="field">
+                            <label>Email</label>
+                            <input type="email" id="email" placeholder="Enter your Email" required>
+
+                        </div>
+
+                </form>
+
+                <form id="debitCardForm"  style="display: none;">
+                    <h1>Debit Card Information</h1>
+                    <div class ="inputFields">
+                        <div class="field">
+                            <label>Name as on Card</label>
+                            <input type="text" id="name" placeholder="Name as on Card" required>
+
+                        </div>
+                                
+                        <div class="field">
+                            <label>Card Billing Address</label>
+                            <input type="text" id="cardBillingAddress" placeholder="Card Billing Address" required>
+
+                        </div>
+
+                         <div class="field">
+                            <label>Card Billing Zip</label>
+                            <input type="text" id="cardBillingZip" placeholder="Card Billing Zip" required>
+
+                        </div>
+
+                        <div class="field">
+                            <label>Card Billing Number</label>
+                            <input type="text" id="cardBillingNumber" placeholder="Card Billing Number" required>
+
+                        </div>
+                        
+                        <div class="field">
+                            <label>Card Expiration Date</label>
+                            <input type="text" id="cardExpirationDate" placeholder="Card Expiration Date" required>
+
+                        </div>
+
+                        <div class="field">
+                            <label>Payment Amount</label>
+                            <input type="text" id="amountTotal" placeholder="Enter the amount to be paid" required>
+
+                        </div>
+
+                        <div class="field">
+                            <label>Email</label>
+                            <input type="email" id="email" placeholder="Enter your Email" required>
+
+                        </div>
+
+                </form>
+
+                <form id="paypalForm"  style="display: none;">
+                    <h1>Credit Card Information</h1>
+                    <div class ="inputFields">
+                        <div class="field">
+                            <label>First Name </label>
+                            <input type="text" id="fname" placeholder="John" required>
+
+                        </div>
+
+                        <div class="field">
+                            <label>Last Name </label>
+                            <input type="text" id="lname" placeholder="Doe" required>
+
+                        </div>
+
+                        <div class="field">
+                            <label>Email</label>
+                            <input type="email" id="email" placeholder="Enter your Email" required>
+
+                        </div>
+
+                        <div class="field">
+                            <label>Payment Amount</label>
+                            <input type="text" id="amountTotal" placeholder="Enter the amount to be paid" required>
+
+                        </div>
+
+                </form>
+                
 
             </section>
 

@@ -1,281 +1,287 @@
 @font-face {
-    font-family: NeueHaasDisplayMedium;
-    src: url(../Assets/Fonts/NeueHaasDisplayMedium.ttf);
+  font-family: NeueHaasDisplayMedium;
+  src: url(../Assets/Fonts/NeueHaasDisplayMedium.ttf);
 }
 
 @font-face {
-    font-family: NeueHaasDisplayRoman;
-    src: url(../Assets/Fonts/NeueHaasDisplayRoman.ttf);
+  font-family: NeueHaasDisplayRoman;
+  src: url(../Assets/Fonts/NeueHaasDisplayRoman.ttf);
 }
 
 /* Checkout page background */
 body {
-    background-color: rgb(0, 9, 24);
-    /* main page color */
-    background-repeat: no-repeat;
-    margin: 0px;
-    padding: 0px;
+  background-color: rgb(0, 9, 24);
+  /* main page color */
+  background-repeat: no-repeat;
+  margin: 0px;
+  padding: 0px;
 }
 
 /* Main content area */
 main {
-    scroll-margin-top: 55px;
-    margin-top: 55px;
-    display: flex;
-    flex-direction: column;
-    min-height: calc(100vh - 55px);
-
+  scroll-margin-top: 55px;
+  margin-top: 55px;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 55px);
 }
-
 
 main h1 {
-    display: block;
-    max-width: fit-content;
-    font-family: NeueHaasDisplayMedium;
-    color: white;
-    font-size: clamp(30px, 2.5vw, 40px);
-    text-align: left;
-    padding: 10px;
-    background-color: rgb(4, 92, 180);
-    font-weight: bold;
-    margin-bottom: 20px;
-
+  display: block;
+  max-width: fit-content;
+  font-family: NeueHaasDisplayMedium;
+  color: white;
+  font-size: clamp(30px, 2.5vw, 40px);
+  text-align: left;
+  padding: 10px;
+  background-color: rgb(4, 92, 180);
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-
-
 main h2 {
-    display: block;
-    max-width: fit-content;
-    font-family: NeueHaasDisplayMedium;
-    color: white;
-    font-size: clamp(20px, 2vw, 30px);
-    text-align: left;
-    padding-top: 10px;
-    margin: 0;
+  display: block;
+  max-width: fit-content;
+  font-family: NeueHaasDisplayMedium;
+  color: white;
+  font-size: clamp(20px, 2vw, 30px);
+  text-align: left;
+  padding-top: 10px;
+  margin: 0;
 }
 
 /* Layout for purchase and cart */
 .content {
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    box-sizing: border-box;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
 }
-
-
 
 /* Purchase summary */
 .purchase {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    padding: 20px 10px;
-    background: linear-gradient(to bottom,
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 20px 10px;
+  background: linear-gradient(
+    to bottom,
 
-            rgb(1, 69, 141),
-            rgb(0, 57, 122),
-            rgb(0, 45, 102),
-            rgb(0, 29, 82));
+    rgb(1, 69, 141),
+    rgb(0, 57, 122),
+    rgb(0, 45, 102),
+    rgb(0, 29, 82)
+  );
 
-
-    border-right: 2px solid rgb(255, 255, 255);
+  border-right: 2px solid rgb(255, 255, 255);
 }
 
 .purchase h1 {
-    padding: 0;
-    margin: 0;
-    background-color: transparent;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
 }
 
 .purchase div {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    justify-content: space-between;
-    margin-top: 30px;
-
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-between;
+  margin-top: 30px;
 }
 
 select {
-    background-color: rgb(0, 9, 24);
-    color: white;
-    font-family: NeueHaasDisplayMedium;
-    border: none;
-    padding: 10px 20px;
-    font-size: clamp(16px, 2vw, 20px);
-    cursor: pointer;
+  background-color: rgb(0, 9, 24);
+  color: white;
+  font-family: NeueHaasDisplayMedium;
+  border: none;
+  padding: 10px 20px;
+  font-size: clamp(16px, 2vw, 20px);
+  cursor: pointer;
+}
+/* Layout for Payment Method*/
+input {
+  border: none;
+  background-color: rgb(50, 53, 60);
+  color: white;
+  font-size: 18px;
+  padding: 10px 10px;
+
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Input fields group */
+.inputFields {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Single input field */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* Cart section */
 .cart {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
+  flex: 2;
+  display: flex;
+  flex-direction: column;
 
-    justify-content: space-between;
-    border-right: 1px solid rgba(255, 255, 255);
+  justify-content: space-between;
+  border-right: 1px solid rgba(255, 255, 255);
 }
 
 /* List of cart items */
 .cart-items {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    overflow: auto;
-    height: 30vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: auto;
+  height: 30vh;
 }
-
 
 /* Individual cart item */
 .cart-item {
-    display: flex;
-    position: relative;
-    gap: 15px;
-    padding: 20px 0 20px 20px;
-    width: 100%;
-    box-sizing: border-box;
-    border-top: 1px solid rgba(255, 255, 255);
-    border-bottom: 1px solid rgba(255, 255, 255);
-
+  display: flex;
+  position: relative;
+  gap: 15px;
+  padding: 20px 0 20px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(255, 255, 255);
+  border-bottom: 1px solid rgba(255, 255, 255);
 }
 
 .cart-item h3 {
-    font-family: NeueHaasDisplayMedium;
-    color: white;
-    font-size: clamp(14px, 1.5vw, 18px);
-    margin: 0;
-    padding-left: 10px;
+  font-family: NeueHaasDisplayMedium;
+  color: white;
+  font-size: clamp(14px, 1.5vw, 18px);
+  margin: 0;
+  padding-left: 10px;
 }
 
 .cart-item img {
-    width: 180px;
-    height: auto;
-    object-fit: cover;
+  width: 180px;
+  height: auto;
+  object-fit: cover;
 }
 
 /* Info inside cart item */
 .cart-info {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* Remove item button */
 .remove-btn {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    width: fit-content;
-    background-color: rgb(4, 92, 180);
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: fit-content;
+  background-color: rgb(4, 92, 180);
 }
 
 /* Order summary */
 .order-summary {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    border-top: 2px solid rgba(255, 255, 255);
-    border-right: 2px solid rgba(255, 255, 255);
-    padding: 20px 10px;
-    justify-content: space-between;
-    box-sizing: border-box;
-
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid rgba(255, 255, 255);
+  border-right: 2px solid rgba(255, 255, 255);
+  padding: 20px 10px;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
 /* Total row */
 .order-total {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
 }
 
 button {
-    background-color: rgb(2, 79, 161);
-    color: white;
-    font-family: NeueHaasDisplayMedium;
-    border: none;
-    padding: 10px 20px;
-    font-size: clamp(16px, 2vw, 20px);
-    cursor: pointer;
-    box-sizing: border-box;
-    margin-top: auto;
+  background-color: rgb(2, 79, 161);
+  color: white;
+  font-family: NeueHaasDisplayMedium;
+  border: none;
+  padding: 10px 20px;
+  font-size: clamp(16px, 2vw, 20px);
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-top: auto;
 }
 
 /* Disable for PC screens */
 .mobile-only {
-    display: none;
+  display: none;
 }
 
 /* Responsive styles */
 @media only screen and (max-width: 768px) {
-    .pc-only {
-        display: none;
-    }
+  .pc-only {
+    display: none;
+  }
 
-    .mobile-only {
-        display: flex;
-    }
+  .mobile-only {
+    display: flex;
+  }
 
-    .content {
-        display: flex;
-        flex-direction: column;
-    }
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
 
-    .cart {
-        flex: 1;
-        border-right: none;
-    }
+  .cart {
+    flex: 1;
+    border-right: none;
+  }
 
-    main h1 {
-        max-width: fit-content;
-        margin-left: auto;
-        margin-right: auto;
-    }
+  main h1 {
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
+  .cart-items {
+    height: 35vh;
+  }
 
-    .cart-items {
-        height: 35vh;
-    }
+  .purchase {
+    border-right: none;
+    padding: 20px 10px;
+    background: none;
+  }
 
-    .purchase {
-        border-right: none;
-        padding: 20px 10px;
-        background: none;
-        
-        
-    }
+  .order-summary {
+    background: linear-gradient(
+      to bottom,
 
-    .order-summary {
-        background: linear-gradient(to bottom,
+      rgb(1, 69, 141),
+      rgb(0, 57, 122),
+      rgb(0, 45, 102),
+      rgb(0, 29, 82)
+    );
 
-                rgb(1, 69, 141),
-                rgb(0, 57, 122),
-                rgb(0, 45, 102),
-                rgb(0, 29, 82));
+    border-right: none;
+    border-top: 2px solid rgb(255, 255, 255);
 
-        border-right: none;
-        border-top: 2px solid rgb(255, 255, 255);
+    margin-bottom: 0;
+  }
 
-        margin-bottom: 0;
+  button {
+    background-color: rgb(0, 9, 24);
+  }
 
-
-
-
-    }
-
-    button {
-        background-color: rgb(0, 9, 24);
-
-    
-    }
-
-    .order-total{
-        margin-bottom: 20px;
-    }
-
-
+  .order-total {
+    margin-bottom: 20px;
+  }
 }

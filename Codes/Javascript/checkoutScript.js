@@ -54,6 +54,24 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Please select a payment method.");
             return;
         }
+       
+       function toggleForm() {
+             //To hide all forms
+            document.getElementById("creditCardForm").style.display = "none";
+            document.getElementById("debitCardForm").style.display = "none";
+            document.getElementById("paypalForm").style.display = "none";
+
+            //To show only the form belonging to the selected option
+            if (paymentMethod === document.getElementById("creditCard").value) {
+                document.getElementById("creditCardForm").style.display = "block";
+            }
+            else if (paymentMethod === document.getElementById("debitCard").value) {
+                document.getElementById("debitCardForm").style.display = "block";
+            }
+            else {
+                document.getElementById("paypalForm").style.display = "block";
+            }
+       }
 
         if (confirm("Are you sure you want to place the order?")) {
             // Simulate order placement
@@ -72,5 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     });
+
+    
 
 });
