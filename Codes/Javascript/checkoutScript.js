@@ -35,9 +35,47 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         document.getElementById("totalPrice").textContent = `$${total.toFixed(2)}`;
+        
+        const amountFields = document.querySelectorAll(".amountTotal");
+        amountFields.forEach(field => {
+            field.value = `$${total.toFixed(2)}`;
+        });
+        //Using this make sure the Cheeckout page and all amount fields have the same value as the total calculated from the cart
+        return total;
     }
-
+    //Editor: Stephen - i am not sure what this right here does
     updateTotal();
+
+    function toggleForm() {
+         /* This reads whichever dropdown is currently shown */
+        const desktopSelect = document.getElementById("paymentMethodDesktop");
+        const mobileSelect  = document.getElementById("paymentMethodMobile");
+ 
+        /* Should sync both dropdowns so they always match */
+        const paymentMethod = desktopSelect.value || mobileSelect.value;
+        if (desktopSelect.value !== paymentMethod) desktopSelect.value = paymentMethod;
+        if (mobileSelect.value  !== paymentMethod) mobileSelect.value  = paymentMethod;
+
+        //To hide all forms
+        document.getElementById("creditCardForm").style.display = "none";
+        document.getElementById("debitCardForm").style.display = "none";
+        document.getElementById("paypalForm").style.display = "none";
+
+        //To show only the form belonging to the selected option
+        if (paymentMethod === document.getElementById("creditCard").value) {
+            document.getElementById("creditCardForm").style.display = "block";
+        }
+        else if (paymentMethod === document.getElementById("debitCard").value) {
+            document.getElementById("debitCardForm").style.display = "block";
+        }
+        else {
+            document.getElementById("paypalForm").style.display = "block";
+        }
+    }
+    
+    //Whenever there is a differing option in the dropbox is chosen, the form will change to the one belonging to the chosen option
+    document.getElementById("paymentMethodDesktop").addEventListener("change", toggleForm);
+    document.getElementById("paymentMethodMobile").addEventListener("change", toggleForm);
 
 
     const placeOrderButton = document.getElementById("placeOrder");
@@ -55,23 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
        
-       function toggleForm() {
-             //To hide all forms
-            document.getElementById("creditCardForm").style.display = "none";
-            document.getElementById("debitCardForm").style.display = "none";
-            document.getElementById("paypalForm").style.display = "none";
-
-            //To show only the form belonging to the selected option
-            if (paymentMethod === document.getElementById("creditCard").value) {
-                document.getElementById("creditCardForm").style.display = "block";
-            }
-            else if (paymentMethod === document.getElementById("debitCard").value) {
-                document.getElementById("debitCardForm").style.display = "block";
-            }
-            else {
-                document.getElementById("paypalForm").style.display = "block";
-            }
-       }
+       
 
         if (confirm("Are you sure you want to place the order?")) {
             // Simulate order placement
@@ -91,6 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    
+
 
 });

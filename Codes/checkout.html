@@ -32,7 +32,7 @@
         <h1>CHECKOUT</h1>
 
         <section class=content>
-            <section class="purchase pc-only" onchange="toggleForm()">
+            <section class="purchase pc-only">
                 <h1>Payment Information</h1>
                 <select id="paymentMethodDesktop">
                     <option value="" disabled selected hidden>Select Payment Method</option>
@@ -46,43 +46,43 @@
                     <div class ="inputFields">
                         <div class="field">
                             <label>Name as on Card</label>
-                            <input type="text" id="name" placeholder="Name as on Card" required>
+                            <input type="text" id="creditCardName" placeholder="Name as on Card" required>
 
                         </div>
                                 
                         <div class="field">
                             <label>Card Billing Address</label>
-                            <input type="text" id="cardBillingAddress" placeholder="Card Billing Address" required>
+                            <input type="text" id="creditCardBillingAddress" placeholder="Card Billing Address" required>
 
                         </div>
 
                          <div class="field">
                             <label>Card Billing Zip</label>
-                            <input type="text" id="cardBillingZip" placeholder="Card Billing Zip" required>
+                            <input type="text" id="creditCardBillingZip" placeholder="Card Billing Zip" required>
 
                         </div>
 
                         <div class="field">
                             <label>Card Billing Number</label>
-                            <input type="text" id="cardBillingNumber" placeholder="Card Billing Number" required>
+                            <input type="text" id="creditCardBillingNumber" placeholder="Card Billing Number" required>
 
                         </div>
                         
                         <div class="field">
                             <label>Card Expiration Date</label>
-                            <input type="text" id="cardExpirationDate" placeholder="Card Expiration Date" required>
+                            <input type="text" id="creditCardExpirationDate" placeholder="Card Expiration Date" required>
 
                         </div>
 
                         <div class="field">
                             <label>Payment Amount</label>
-                            <input type="text" id="amountTotal" placeholder="Enter the amount to be paid" required>
+                            <input type="text" class="amountTotal" id="creditCardAmount" placeholder="Enter the amount to be paid" required>
 
                         </div>
 
                         <div class="field">
                             <label>Email</label>
-                            <input type="email" id="email" placeholder="Enter your Email" required>
+                            <input type="email" id="creditCardEmail" placeholder="Enter your Email" required>
 
                         </div>
 
@@ -93,37 +93,37 @@
                     <div class ="inputFields">
                         <div class="field">
                             <label>Name as on Card</label>
-                            <input type="text" id="name" placeholder="Name as on Card" required>
+                            <input type="text" id="debitCardName" placeholder="Name as on Card" required>
 
                         </div>
                                 
                         <div class="field">
                             <label>Card Billing Address</label>
-                            <input type="text" id="cardBillingAddress" placeholder="Card Billing Address" required>
+                            <input type="text" id="debitCardBillingAddress" placeholder="Card Billing Address" required>
 
                         </div>
 
                          <div class="field">
                             <label>Card Billing Zip</label>
-                            <input type="text" id="cardBillingZip" placeholder="Card Billing Zip" required>
+                            <input type="text" id="debitCardBillingZip" placeholder="Card Billing Zip" required>
 
                         </div>
 
                         <div class="field">
                             <label>Card Billing Number</label>
-                            <input type="text" id="cardBillingNumber" placeholder="Card Billing Number" required>
+                            <input type="text" id="debitCardBillingNumber" placeholder="Card Billing Number" required>
 
                         </div>
                         
                         <div class="field">
                             <label>Card Expiration Date</label>
-                            <input type="text" id="cardExpirationDate" placeholder="Card Expiration Date" required>
+                            <input type="text" id="debitCardExpirationDate" placeholder="Card Expiration Date" required>
 
                         </div>
 
                         <div class="field">
                             <label>Payment Amount</label>
-                            <input type="text" id="amountTotal" placeholder="Enter the amount to be paid" required>
+                            <input type="text" class="amountTotal" id="debitCardAmount" placeholder="Enter the amount to be paid" required>
 
                         </div>
 
@@ -139,26 +139,26 @@
                     <h1>Credit Card Information</h1>
                     <div class ="inputFields">
                         <div class="field">
-                            <label>First Name </label>
-                            <input type="text" id="fname" placeholder="John" required>
+                            <label>First Name</label>
+                            <input type="text" id="paypalFname" placeholder="John" required>
 
                         </div>
 
                         <div class="field">
-                            <label>Last Name </label>
-                            <input type="text" id="lname" placeholder="Doe" required>
+                            <label>Last Name</label>
+                            <input type="text" id="paypalLname" placeholder="Doe" required>
 
                         </div>
 
                         <div class="field">
                             <label>Email</label>
-                            <input type="email" id="email" placeholder="Enter your Email" required>
+                            <input type="email" id="paypalEmail" placeholder="johndoe@example.com" required>
 
                         </div>
 
                         <div class="field">
                             <label>Payment Amount</label>
-                            <input type="text" id="amountTotal" placeholder="Enter the amount to be paid" required>
+                            <input type="text" class="amountTotal" id="paypalAmount" placeholder="Enter the amount to be paid" required>
 
                         </div>
 
