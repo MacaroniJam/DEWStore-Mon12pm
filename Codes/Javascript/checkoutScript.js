@@ -77,6 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
         
         if (paymentMethod === "creditCard") {
             name = document.getElementById("creditCardName")?.value || "";
+            number = document.getElementById("creditCardNumber")?.value || "";
+            expiration = document.getElementById("creditCardExpiration")?.value || "";
             address = document.getElementById("creditCardBillingAddress")?.value || "";
             city = document.getElementById("creditCardCity")?.value || "";
             zip = document.getElementById("creditCardBillingZip")?.value || "";
@@ -86,6 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
             invoiceNumber = document.getElementById("creditCardInvoiceNumber")?.value || "";
         } else if (paymentMethod === "debitCard") {
             name = document.getElementById("debitCardName")?.value || "";
+            number = document.getElementById("debitCardNumber")?.value || "";
+            expiration = document.getElementById("debitCardExpiration")?.value || "";
             address = document.getElementById("debitCardBillingAddress")?.value || "";
             city = document.getElementById("debitCardCity")?.value || "";
             zip = document.getElementById("debitCardBillingZip")?.value || "";
@@ -108,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const fullAddress = `${address}, ${city}, ${zip}`;
         
-        return { name, address: fullAddress, zip, email, trn, invoiceDate, invoiceNumber };
+        return { name, number, expiration, address: fullAddress, zip, email, trn, invoiceDate, invoiceNumber };
     }
 
     // Calculate taxes (assume 15% tax rate)
@@ -137,18 +141,24 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Invoice saved to localStorage:", invoice);
         return allInvoices;
     }
+    /* This is to find and retrieve the invoice from localStorage using user's input of their TRN
+    function findInvoiceByTRN(trn) {
+        const allInvoices = JSON.parse(localStorage.getItem("AllInvoices")) || [];
+        return allInvoices.find(inv => inv.trn === trn);
+    }
+    */
 
     // Simple alert for email sent
     function showEmailSentMessage(email, invoiceNumber) {
-        // Simple alert first
-        alert(`Invoice #${invoiceNumber} has been sent to ${email}`);
-        
+        // Use mailto link to open user's email client with pre-filled email
+        window.location.href = `mailto:${email}?subject=Your Invoice from D.E.W Store&body=Thank you for your purchase! Your invoice number is ${invoiceNumber}. If you have any questions, please contact our support team.`;
+
         // Also show a console log for debugging
         console.log(`Email sent to: ${email} with Invoice #${invoiceNumber}`);
     }
 
-    // Generate and display invoice
-    function generateAndDisplayInvoice(shippingInfo, cartItems, totalCost) {
+    // Generate and ship invoice
+    function generateAndShipInvoice(shippingInfo, cartItems, totalCost) {
         const subtotal = totalCost;
         const taxes = calculateTaxes(subtotal);
         const totalWithTax = subtotal + taxes;
@@ -298,7 +308,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Validate form fields
-    function validateForm() {
+    function validatePaymentForm() {
         const paymentMethod = document.getElementById("paymentMethodDesktop")?.value || document.getElementById("paymentMethodMobile")?.value;
         
         if (!paymentMethod || paymentMethod === "" || paymentMethod === "selected") {
@@ -354,7 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const total = updateTotal();
         
         // Generate and display invoice (also saves to localStorage)
-        generateAndDisplayInvoice(shippingInfo, [...cart], total);
+        generateAndShipInvoice(shippingInfo, [...cart], total);
         
         // Clear cart
         cart = [];
@@ -384,7 +394,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "cart.html";
     }
 
-    // Event listeners
+    // Event listeners for buttons and invoice
     const placeOrderButton = document.getElementById("placeOrder");
     if (placeOrderButton) {
         placeOrderButton.addEventListener("click", processOrder);
