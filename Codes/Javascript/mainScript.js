@@ -1,6 +1,7 @@
 // saving username and login status in session storage for use across pages, will be cleared when browser is closed
 var username = sessionStorage.getItem("username") || "";
 var loggedIn = sessionStorage.getItem("loggedIn") === "true";
+
 let usernameDiv = null;
 
 // Header and nav elements for dynamic updates based on login status

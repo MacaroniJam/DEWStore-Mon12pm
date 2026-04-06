@@ -24,7 +24,9 @@ main {
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - 55px);
+
 }
+
 
 main h1 {
   display: block;
@@ -37,7 +39,10 @@ main h1 {
   background-color: rgb(4, 92, 180);
   font-weight: bold;
   margin-bottom: 20px;
+
 }
+
+
 
 main h2 {
   display: block;
@@ -58,6 +63,8 @@ main h2 {
   box-sizing: border-box;
 }
 
+
+
 /* Purchase summary */
 .purchase {
   flex: 1;
@@ -65,13 +72,14 @@ main h2 {
   flex-direction: column;
   gap: 25px;
   padding: 20px 10px;
-  background: linear-gradient(
-    to bottom,
-    rgb(1, 69, 141),
-    rgb(0, 57, 122),
-    rgb(0, 45, 102),
-    rgb(0, 29, 82)
-  );
+  background: linear-gradient(to bottom,
+
+      rgb(1, 69, 141),
+      rgb(0, 57, 122),
+      rgb(0, 45, 102),
+      rgb(0, 29, 82));
+
+
   border-right: 2px solid rgb(255, 255, 255);
 }
 
@@ -81,68 +89,16 @@ main h2 {
   background-color: transparent;
 }
 
-.purchase div {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: space-between;
-  margin-top: 30px;
-}
 
-/* Form Styles - Enhanced with Vertical Layout */
-.purchase form {
-  background: rgba(0, 9, 24, 0.7);
-  border-radius: 12px;
-  padding: 25px;
-  margin-top: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
 
-.purchase form h1 {
-  font-size: 22px;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid rgb(4, 92, 180);
-  display: inline-block;
-  background: none;
-  padding-left: 0;
-  padding-right: 0;
-}
-
-/* Input fields group - VERTICAL LAYOUT */
-.inputFields {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Single input field - VERTICAL LAYOUT (label on top, input below) */
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-}
-
-.field label {
-  font-family: NeueHaasDisplayMedium;
-  color: rgb(220, 220, 220);
-  font-size: 14px;
-  letter-spacing: 0.5px;
-}
-
-/* Select dropdown styling */
 select {
-  background-color: rgba(0, 9, 24, 0.9);
+  background-color: rgb(0, 9, 24);
   color: white;
   font-family: NeueHaasDisplayMedium;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 14px 20px;
-  font-size: 16px;
+  border: none;
+  padding: 10px 20px;
+  font-size: clamp(16px, 2vw, 20px);
   cursor: pointer;
-  border-radius: 8px;
-  width: 100%;
-  transition: all 0.3s ease;
 }
 
 select:focus {
@@ -151,63 +107,12 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(4, 92, 180, 0.2);
 }
 
-/* Wider input boxes with better visibility */
-input {
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(0, 9, 24, 0.9);
-  color: white;
-  font-size: 16px;
-  padding: 14px 15px;
-  width: 100%;
-  min-width: 250px;
-  box-sizing: border-box;
-  border-radius: 8px;
-  font-family: NeueHaasDisplayRoman;
-  transition: all 0.3s ease;
-}
-
-input:focus {
-  outline: none;
-  border-color: rgb(4, 92, 180);
-  background-color: rgb(0, 9, 24);
-  box-shadow: 0 0 0 3px rgba(4, 92, 180, 0.2);
-}
-
-input:hover {
-  border-color: rgba(4, 92, 180, 0.6);
-}
-
-input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 15px;
-}
-
-/* Make sure the form container doesn't interfere with vertical layout */
-.purchase form div:not(.inputFields):not(.field) {
-  display: block;
-}
-
-/* Form animation */
-.purchase form {
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Cart section */
 .cart {
   flex: 2;
   display: flex;
   flex-direction: column;
+
   justify-content: space-between;
   border-right: 1px solid rgba(255, 255, 255);
 }
@@ -221,6 +126,7 @@ input::placeholder {
   height: 30vh;
 }
 
+
 /* Individual cart item */
 .cart-item {
   display: flex;
@@ -231,6 +137,7 @@ input::placeholder {
   box-sizing: border-box;
   border-top: 1px solid rgba(255, 255, 255);
   border-bottom: 1px solid rgba(255, 255, 255);
+
 }
 
 .cart-item h3 {
@@ -273,6 +180,7 @@ input::placeholder {
   padding: 20px 10px;
   justify-content: space-between;
   box-sizing: border-box;
+
 }
 
 /* Total row */
@@ -300,6 +208,106 @@ button {
 .mobile-only {
   display: none;
 }
+
+
+
+/* Form Styles - Enhanced with Vertical Layout */
+form {
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 9, 24, 0.7);
+  border-radius: 12px;
+  padding: 25px;
+  margin-top: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.purchase form h1 {
+  font-size: clamp(22px, 2vw, 28px);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgb(4, 92, 180);
+  display: inline-block;
+  background: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Input fields group - VERTICAL LAYOUT */
+.inputFields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Single input field - VERTICAL LAYOUT (label on top, input below) */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+label {
+  font-size: clamp(14px, 1.5vw, 18px);
+  font-family: NeueHaasDisplayMedium;
+  color: rgb(220, 220, 220);
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+
+
+
+/* Wider input boxes with better visibility */
+input {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 9, 24, 0.9);
+  color: white;
+  font-size: 16px;
+  padding: 14px 15px;
+  width: 100%;
+  min-width: 250px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  font-family: NeueHaasDisplayRoman;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: rgb(4, 92, 180);
+  background-color: rgb(0, 9, 24);
+  box-shadow: 0 0 0 3px rgba(4, 92, 180, 0.2);
+}
+
+input:hover {
+  border-color: rgba(4, 92, 180, 0.6);
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 15px;
+}
+
+
+/* Form animation */
+.purchase form {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 /* Responsive styles */
 @media only screen and (max-width: 768px) {
@@ -332,18 +340,22 @@ button {
   }
 
   .purchase {
+    display: flex;
     border-right: none;
     padding: 20px 10px;
     background: none;
   }
 
-  .purchase form {
+  form {
+    display: flex;
+    flex-direction: column;
     padding: 20px;
     margin-bottom: 20px;
     background: rgba(0, 9, 24, 0.8);
   }
 
   input {
+
     padding: 12px 15px;
     font-size: 15px;
     min-width: auto;
@@ -359,13 +371,11 @@ button {
   }
 
   .order-summary {
-    background: linear-gradient(
-      to bottom,
-      rgb(1, 69, 141),
-      rgb(0, 57, 122),
-      rgb(0, 45, 102),
-      rgb(0, 29, 82)
-    );
+    background: linear-gradient(to bottom,
+        rgb(1, 69, 141),
+        rgb(0, 57, 122),
+        rgb(0, 45, 102),
+        rgb(0, 29, 82));
     border-right: none;
     border-top: 2px solid rgb(255, 255, 255);
     margin-bottom: 0;
@@ -378,22 +388,13 @@ button {
   .order-total {
     margin-bottom: 20px;
   }
-}
-@media only screen and (max-width: 480px) {
-  .pc-only {
-    display: none;
-  }
 
-  .mobile-only {
+  .purchase div {
     display: flex;
-  }
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+    margin-top: 30px;
 
-  .content {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .cart {
-    flex: 1;
   }
 }
