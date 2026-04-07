@@ -1,10 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const resetPasswordForm = document.getElementById("resetPasswordForm");
     const newPasswordInput = document.getElementById("newPassword");
     const confirmNewPasswordInput = document.getElementById("confirmNewPassword");
     const toggleNewPassword = document.getElementById("toggleNewPassword");
     const toggleConfirmNewPassword = document.getElementById("toggleConfirmNewPassword");
-    const cancelButton = document.getElementById("cancelButton");
 
     toggleNewPassword.addEventListener("click", () => {
         const type = newPasswordInput.type === "password" ? "text" : "password";
@@ -16,14 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const type = confirmNewPasswordInput.type === "password" ? "text" : "password";
         confirmNewPasswordInput.type = type;
         toggleConfirmNewPassword.textContent = type === "password" ? "visibility" : "visibility_off";
-    });
-
-    cancelButton.addEventListener("click", () => {
-        resetPasswordForm.reset();
-        newPasswordInput.type = "password";
-        confirmNewPasswordInput.type = "password";
-        toggleNewPassword.textContent = "visibility";
-        toggleConfirmNewPassword.textContent = "visibility";
     });
 });
 
@@ -41,7 +31,7 @@ function resetPassword(event) {
         const trn = document.getElementById("trn").value.trim();
         const newPassword = document.getElementById("newPassword").value;
         const confirmNewPassword = document.getElementById("confirmNewPassword").value;
-        const registrationData = JSON.parse(localStorage.getItem("RegistrationData")) || [];
+        const registrationData = getRegistrationData();
         const registeredUser = registrationData.find((record) => record.trn === trn);
 
         if (!registeredUser) {
@@ -60,7 +50,7 @@ function resetPassword(event) {
         }
 
         registeredUser.password = newPassword;
-        localStorage.setItem("RegistrationData", JSON.stringify(registrationData));
+        saveRegistrationData(registrationData);
         sessionStorage.removeItem("loginAttempts");
 
         alert("Password reset successful. Please log in with your new password.");

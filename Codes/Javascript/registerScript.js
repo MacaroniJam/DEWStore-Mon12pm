@@ -1,10 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const registerForm = document.getElementById("registerForm");
     const passwordInput = document.getElementById("password");
     const eye = document.getElementById("togglePassword");
     const confirmPasswordInput = document.getElementById("confirmPassword");
     const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
-    const cancelButton = document.getElementById("cancelButton");
 
     //Toggle password visibility for both password and confirm password fields
     eye.addEventListener("click", () => {
@@ -18,36 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
         confirmPasswordInput.type = type;
         toggleConfirmPassword.textContent = type === "password" ? "visibility" : "visibility_off";
     });
-
-    cancelButton.addEventListener("click", () => {
-        registerForm.reset();
-        passwordInput.type = "password";
-        confirmPasswordInput.type = "password";
-        eye.textContent = "visibility";
-        toggleConfirmPassword.textContent = "visibility";
-    });
 });
 
-
-function getRegistrationData() {
-    const storedRegistrationData = localStorage.getItem("RegistrationData");
-
-    if (!storedRegistrationData) {
-        return [];
-    }
-
-    const registrationData = JSON.parse(storedRegistrationData);
-
-    if (!Array.isArray(registrationData)) {
-        throw new Error("RegistrationData must be an array.");
-    }
-
-    return registrationData;
-}
-
-function saveRegistrationData(registrationData) {
-    localStorage.setItem("RegistrationData", JSON.stringify(registrationData));
-}
 
 function calculateAge(dateOfBirth) {
     const today = new Date();

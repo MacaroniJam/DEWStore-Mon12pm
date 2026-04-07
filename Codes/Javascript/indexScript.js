@@ -10,19 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Toggle password visibility
     const passwordInput = document.getElementById("password");
     const eye = document.getElementById("togglePassword");
-    const loginForm = document.getElementById("loginForm");
-    const cancelButton = document.getElementById("cancelButton");
 
     eye.addEventListener("click", () => {
         const type = passwordInput.type === "password" ? "text" : "password";
         passwordInput.type = type;
         eye.textContent = type === "password" ? "visibility" : "visibility_off";
-    });
-
-    cancelButton.addEventListener("click", () => {
-        loginForm.reset();
-        passwordInput.type = "password";
-        eye.textContent = "visibility";
     });
 });
 
@@ -39,7 +31,7 @@ function login(event) {
 
         const trn = document.getElementById("trn").value.trim();
         const password = document.getElementById("password").value;
-        const registrationData = JSON.parse(localStorage.getItem("RegistrationData")) || [];
+        const registrationData = getRegistrationData();
         const registeredUser = registrationData.find((record) => record.trn === trn && record.password === password);
 
         if (!registeredUser) {
@@ -57,7 +49,8 @@ function login(event) {
         }
 
         sessionStorage.removeItem("loginAttempts");
-        SetUsername(registeredUser.trn);
+        const displayName = [registeredUser.firstName, registeredUser.lastName].filter(Boolean).join(" ") || registeredUser.trn;
+        SetUsername(displayName);
         window.location.href = 'games.html';
         return true;
     } catch (error) {
