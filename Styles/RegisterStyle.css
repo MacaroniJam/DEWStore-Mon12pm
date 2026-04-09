@@ -79,7 +79,8 @@ body {
 
 
 
-input {
+input,
+select {
     border: none;
     background-color: rgb(50, 53, 60);
     color: white;
@@ -89,6 +90,10 @@ input {
     width: 100%;
     box-sizing: border-box;
 
+}
+
+select {
+    font-family: NeueHaasDisplayRoman;
 }
 
 /* Input fields group */
@@ -128,6 +133,12 @@ label {
     color: white;
     font-size: clamp(16px, 2vw, 20px);
 
+}
+
+.passwordNote {
+    color: rgb(180, 180, 180);
+    font-family: NeueHaasDisplayRoman;
+    font-size: 14px;
 }
 
 button {

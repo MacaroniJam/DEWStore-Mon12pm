@@ -67,7 +67,8 @@ body {
 
 
 /* Login form */
-#loginForm {
+#loginForm,
+#resetPasswordForm {
     flex: 2;
     display: flex;
     flex-direction: column;
@@ -130,6 +131,19 @@ label {
 
 }
 
+.messageText {
+    color: white;
+    font-family: NeueHaasDisplayRoman;
+    font-size: clamp(16px, 2vw, 20px);
+    margin: 0;
+}
+
+.passwordNote {
+    color: rgb(180, 180, 180);
+    font-family: NeueHaasDisplayRoman;
+    font-size: 14px;
+}
+
 button {
     background-color: rgb(0, 122, 255);
     color: white;
@@ -139,6 +153,19 @@ button {
     cursor: pointer;
     width: 100%;
     box-sizing: border-box;
+}
+
+.formLink {
+    color: rgb(0, 122, 255);
+    font-family: NeueHaasDisplayRoman;
+    font-size: clamp(16px, 2vw, 20px);
+    padding-bottom: 30px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.formLink:hover {
+    text-decoration: underline;
 }
 
 /* Side image container */
@@ -203,7 +230,8 @@ button {
         display: none;
     }
 
-    #loginForm {
+    #loginForm,
+    #resetPasswordForm {
         gap: 0;
     }
 
