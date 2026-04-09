@@ -4,6 +4,26 @@ var loggedIn = sessionStorage.getItem("loggedIn") === "true";
 
 let usernameDiv = null;
 
+function getRegistrationData() {
+    const storedRegistrationData = localStorage.getItem("RegistrationData");
+
+    if (!storedRegistrationData) {
+        return [];
+    }
+
+    const registrationData = JSON.parse(storedRegistrationData);
+
+    if (!Array.isArray(registrationData)) {
+        throw new Error("RegistrationData must be an array.");
+    }
+
+    return registrationData;
+}
+
+function saveRegistrationData(registrationData) {
+    localStorage.setItem("RegistrationData", JSON.stringify(registrationData));
+}
+
 // Header and nav elements for dynamic updates based on login status
 const header = document.querySelector('header');
 const navLinks = document.getElementById('nav-links');
@@ -175,6 +195,7 @@ function updateNav() {
 }
 
 function SetUsername(name) {
+    username = name;
     sessionStorage.setItem("username", name);
     sessionStorage.setItem("loggedIn", "true");
     updateNav();
