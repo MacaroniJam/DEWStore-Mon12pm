@@ -18,76 +18,121 @@
         <div>
             <img src="../Assets/Images/DEWLogo.png" alt="D.E.W Store Logo">
             <h1>D.E.W Store</h1>
-
         </div>
 
         <nav id="nav-links">
 
         </nav>
 
-
     </header>
 
     <main>
         <h1>CHECKOUT</h1>
 
-        <section class=content>
+        <section class="content">
             <section class="purchase pc-only">
                 <h1>Payment Information</h1>
                 <select id="paymentMethodDesktop">
-                    <option value="" disabled selected hidden>Select Payment Method</option>
-                    <option value="debitCard">Debit Card</option>
+                    <option value="" disabled selected>Select Payment Method</option>
                     <option value="creditCard">Credit Card</option>
+                    <option value="debitCard">Debit Card</option>
                     <option value="paypal">PayPal</option>
                 </select>
+                
+                <!-- CREDIT CARD FORM -->
+                <form id="creditCardForm">
+                    <h1>Credit Card Information</h1>
+                    <div class="inputFields">
+                        <div class="field">
+                            <label>Full Name on Card</label>
+                            <input type="text" id="creditCardName" placeholder="John Doe" required>
+                        </div>
 
+                        <div class="field">
+                            <label>Card Number</label>
+                            <input type="text" id="creditCardNumber" placeholder="123456789" required>
+                        </div>
+
+                        <div class="field">
+                            <label>Card Expiration Date</label>
+                            <input type="text" id="creditCardExpiration" placeholder="MM/YY" required>
+                        </div>
+
+                                
+
+                    </div>
+                </form>
+
+                <!-- DEBIT CARD FORM -->
+                <form id="debitCardForm" style="display: none;">
+                    <h1>Debit Card Information</h1>
+                    <div class="inputFields">
+                        <div class="field">
+                            <label>Full Name on Card</label>
+                            <input type="text" id="debitCardName" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="field">
+                            <label>Card Number</label>
+                            <input type="text" id="debitCardNumber" placeholder="123456789" required>
+                        </div>
+
+                        <div class="field">
+                            <label>Card Expiration Date</label>
+                            <input type="text" id="debitCardExpiration" placeholder="MM/YY" required>
+                        </div>
+                    </div>
+
+                </form>
+
+                <!-- PAYPAL FORM -->
+                <form id="paypalForm" style="display: none;">
+                    <h1>PayPal Information</h1>
+                    <div class="inputFields">
+                        <div class="field">
+                            <label>PayPal Email</label>
+                            <input type="email" id="paypalEmail" placeholder="john.doe@example.com" required>
+                        </div>
+                    </div>
+                </form>
             </section>
 
             <section class="cart">
                 <div class="cart-items">
-
-                    <!-- Div for cart items to be populated by JavaScript -->
                     <div id="cartContainer"></div>
-
-
-
-
                 </div>
 
                 <div class="order-summary">
-                    <!-- To move div position in mobile view by turning off the display of the pc only elements and turning on the mobile-only elements -->
                     <section class="purchase mobile-only">
                         <h1>Payment Information</h1>
                         <select id="paymentMethodMobile">
-                            <option value="" disabled selected hidden>Select Payment Method</option>
-                            <option value="debitCard">Debit Card</option>
+                            <option value="" disabled selected>Select Payment Method</option>
                             <option value="creditCard">Credit Card</option>
+                            <option value="debitCard">Debit Card</option>
                             <option value="paypal">PayPal</option>
                         </select>
-
                     </section>
+                    
                     <div class="order-total">
                         <h2>Total</h2>
                         <h2><span id="totalPrice">$0.00</span></h2>
-
                     </div>
 
                     <button id="placeOrder">Place Order</button>
-
-
                 </div>
-
             </section>
-
         </section>
-
-
-
-
     </main>
 
-
-
+    <!-- Invoice Display Div -->
+    <div id="invoiceDisplay" class="invoice-container" style="display: none;">
+        <div class="invoice-content">
+            <button id="closeInvoice" class="close-invoice">×</button>
+            <div id="invoiceGenerated"></div>
+        </div>
+    </div>
+        <!-- Container for email sent messages -->
+    <div id="emailMessageContainer"></div>
 </body>
 
 </html>
