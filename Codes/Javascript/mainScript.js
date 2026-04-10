@@ -172,6 +172,7 @@ function updateNav() {
             
             sessionStorage.removeItem("username");
             sessionStorage.removeItem("loggedIn");
+            sessionStorage.removeItem("currentTRN");
 
             loggedIn = false;
             username = null;

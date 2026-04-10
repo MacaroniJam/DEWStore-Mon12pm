@@ -50,6 +50,7 @@ function login(event) {
 
         sessionStorage.removeItem("loginAttempts");
         const displayName = [registeredUser.firstName, registeredUser.lastName].filter(Boolean).join(" ") || registeredUser.trn;
+        sessionStorage.setItem("currentTRN", registeredUser.trn);
         SetUsername(displayName);
         window.location.href = 'games.html';
         return true;

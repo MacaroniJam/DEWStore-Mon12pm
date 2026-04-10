@@ -58,7 +58,10 @@
                             <input type="text" id="creditCardExpiration" placeholder="MM/YY" required>
                         </div>
 
-                                
+                        <div class="field">
+                            <label>Credit Card Email</label>
+                            <input type="email" id="creditCardEmail" placeholder="john.doe@example.com" required>
+                        </div>        
 
                     </div>
                 </form>
@@ -81,6 +84,10 @@
                             <label>Card Expiration Date</label>
                             <input type="text" id="debitCardExpiration" placeholder="MM/YY" required>
                         </div>
+                        <div class="field">
+                            <label>Debit Card Email</label>
+                            <input type="email" id="debitCardEmail" placeholder="john.doe@example.com" required>
+                        </div>
                     </div>
 
                 </form>
@@ -89,10 +96,8 @@
                 <form id="paypalForm" style="display: none;" onsubmit="validatePaymentForm(event)">
                     <h1>PayPal Information</h1>
                     <div class="inputFields">
-                        <div class="field">
-                            <label>PayPal Email</label>
-                            <input type="email" id="paypalEmail" placeholder="john.doe@example.com" required>
-                        </div>
+                        <label>PayPal Email</label>
+                        <input type="email" id="paypalEmail" placeholder="john.doe@example.com" required>
                     </div>
                 </form>
             </section>
@@ -124,14 +129,13 @@
         </section>
     </main>
 
-    <!-- Invoice Display Div 
-    <div id="invoiceDisplay" class="invoice-container" style="display: flex;">
+    <!-- Invoice Display Div -->
+    <div id="invoiceDisplay" class="invoice-container" style="display: none;">
         <div class="invoice-content">
             <button id="closeInvoice" class="close-invoice">×</button>
             <div id="invoiceGenerated"></div>
         </div>
     </div>
-    -->
         <!-- Container for email sent messages -->
     <div id="emailMessageContainer"></div>
 </body>

@@ -69,28 +69,32 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("paymentMethodMobile").addEventListener("change", toggleForm);
     toggleForm();
 
+    function getCurrentTRN() {
+        return sessionStorage.getItem("currentTRN") || "";
+    }
+
     // Get payment method information from the active form
     function getPaymentMethodInfo() {
         const paymentMethod = document.getElementById("paymentMethodDesktop")?.value || document.getElementById("paymentMethodMobile")?.value;
         
         let name = "", number = "", expiration = "", email = "";
+        const trn = getCurrentTRN();
         
         if (paymentMethod === "creditCard") {
             name = document.getElementById("creditCardName")?.value || "";
             number = document.getElementById("creditCardNumber")?.value || "";
             expiration = document.getElementById("creditCardExpiration")?.value || "";
-            
+            email = document.getElementById("creditCardEmail")?.value || "";
         } else if (paymentMethod === "debitCard") {
             name = document.getElementById("debitCardName")?.value || "";
             number = document.getElementById("debitCardNumber")?.value || "";
             expiration = document.getElementById("debitCardExpiration")?.value || "";
-           
+            email = document.getElementById("debitCardEmail")?.value || "";
         } else if (paymentMethod === "paypal") {
             email = document.getElementById("paypalEmail")?.value || "";
-           
         }
         
-        return { name, number, expiration, email, trn};
+        return { paymentMethod, name, number, expiration, email, trn };
     }
 
     // Calculate taxes (assume 15% tax rate)
@@ -99,13 +103,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return subtotal * taxRate;
     }
 
-    // Generate unique invoice number if not provided
-    function generateInvoiceNumber() {
-        const timestamp = Date.now();
-        const random = Math.floor(Math.random() * 10000);
-        return `INV-${timestamp}-${random}`;
+    // Generate a sequential unique invoice number
+    function getNextInvoiceNumber() {
+        const lastNumber = Number(localStorage.getItem("LastInvoiceNumber") || "0");
+        const nextNumber = lastNumber + 1;
+        localStorage.setItem("LastInvoiceNumber", String(nextNumber));
+        return String(nextNumber).padStart(3, "0");
     }
-
 
     // Save invoice to localStorage
     function saveInvoiceToStorage(invoice) {
@@ -131,27 +135,58 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(`Email sent to: ${email} with Invoice #${invoiceNumber}`);
     }
 
+    function showRecentInvoice(invoiceHTML, invoice) {
+        const invoiceDisplay = document.getElementById("invoiceDisplay");
+        const invoiceGenerated = document.getElementById("invoiceGenerated");
+
+        if (invoiceGenerated) {
+            invoiceGenerated.innerHTML = invoiceHTML;
+        }
+
+        if (invoiceDisplay) {
+            invoiceDisplay.style.display = "flex";
+        }
+
+        console.log("Recently created invoice:", invoice);
+    }
+
+    function showInvoices(searchTRN = "") {
+        const allInvoices = JSON.parse(localStorage.getItem("AllInvoices")) || [];
+
+        if (!searchTRN) {
+            console.log("All registered invoices:", allInvoices);
+        } else {
+            const matched = allInvoices.filter(inv => inv.trn === searchTRN);
+            if (matched.length) {
+                console.log(`Invoices for TRN ${searchTRN}:`, matched);
+            } else {
+                console.log(`No invoices found for TRN ${searchTRN}.`);
+            }
+        }
+
+        return allInvoices;
+    }
+
+    window.ShowInvoices = showInvoices;
+    window.showInvoices = showInvoices;
+
     // Generate and email invoice
     function generateAndEmailInvoice(paymentMethodInfo, cartItems, totalCost) {
         const subtotal = totalCost;
         const taxes = calculateTaxes(subtotal);
         const totalWithTax = subtotal + taxes;
-        const registrationData = getRegistrationData(); // From mainScript.js
-
-        
-        // Use provided invoice number/TRN or generate new ones
-        const finalInvoiceNumber =  generateInvoiceNumber();
-        const finalTRN = registrationData.trn
-        const finalInvoiceDate = paymentMethodInfo.invoiceDate || new Date().toLocaleString();
+        const finalInvoiceNumber = getNextInvoiceNumber();
+        const finalTRN = paymentMethodInfo.trn || "UNKNOWN";
+        const finalInvoiceDate = new Date().toLocaleString();
         
         const purchasedItems = cartItems.map(gameId => {
             const game = games.find(g => g.id === gameId);
             return {
-                name: game.title,
+                name: game?.title || "Unknown item",
                 quantity: 1,
-                price: game.price,
+                price: game?.price || "$0.00",
                 discount: "$0.00",
-                total: game.price
+                total: game?.price || "$0.00"
             };
         });
         
@@ -161,7 +196,6 @@ document.addEventListener("DOMContentLoaded", () => {
             trn: finalTRN,
             companyName: "D.E.W Store",
             date: finalInvoiceDate,
-           
             purchasedItems: purchasedItems,
             subtotal: `$${subtotal.toFixed(2)}`,
             taxes: `$${taxes.toFixed(2)}`,
@@ -194,7 +228,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         <span class="detail-value">${finalInvoiceDate}</span>
                     </div>
                 </div>
-                
                 
                 <table class="invoice-table">
                     <thead>
@@ -245,17 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
         
-        // Display invoice
-        const invoiceDisplay = document.getElementById("invoiceDisplay");
-        const invoiceGenerated = document.getElementById("invoiceGenerated");
-        
-        if (invoiceGenerated) {
-            invoiceGenerated.innerHTML = invoiceHTML;
-        }
-        
-        if (invoiceDisplay) {
-            invoiceDisplay.style.display = "flex";
-        }
+        showRecentInvoice(invoiceHTML, invoice);
         
         // Show email sent message (using alert for reliability)
         showEmailSentMessage(paymentMethodInfo.email, finalInvoiceNumber);
@@ -273,7 +296,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         if (paymentMethod === "creditCard") {
-            const required = ["creditCardName", "creditCardNumber", "creditCardExpiration"];
+            const required = ["creditCardName", "creditCardNumber", "creditCardExpiration", "creditCardEmail"];
             for (let id of required) {
                 if (!document.getElementById(id)?.value) {
                     alert("Please fill in all credit card fields.");
@@ -281,7 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         } else if (paymentMethod === "debitCard") {
-            const required = ["debitCardName", "debitCardNumber", "debitCardExpiration"];
+            const required = ["debitCardName", "debitCardNumber", "debitCardExpiration", "debitCardEmail"];
             for (let id of required) {
                 if (!document.getElementById(id)?.value) {
                     alert("Please fill in all debit card fields.");
@@ -306,74 +329,47 @@ document.addEventListener("DOMContentLoaded", () => {
         placeOrderButton.addEventListener("click", processOrder);
     }
 
-    
     updateTotal();
 
     // Process order and generate invoice
     function processOrder() {
-        
-        
         if (cart.length === 0) {
             alert("Your cart is empty!");
             return;
         }
-        
+
         if (!validatePaymentForm()) {
             return;
         }
-        
+
         if (!confirm("Are you sure you want to place the order?")) {
-            const paymentInfo = getPaymentMethodInfo();
-            const total = updateTotal();
-
-            // Generate and display invoice
-            generateAndEmailInvoice(paymentInfo, [...cart], total);
-
-            // Clear cart after successful order
-            cart = [];
-            if (typeof saveCart === 'function') {
-                saveCart();
-            }
-
-            // Reset UI
-            if (cartContainer) cartContainer.innerHTML = "";
-            const allInputs = document.querySelectorAll("input");
-            allInputs.forEach(input => input.value = "");
+            
+            window.location.href = "games.html";
             return;
         }
-        
-       
-    }
-    const paymentInfo = getPaymentMethodInfo();
-    const total = updateTotal();
-        
-    // Generate and display invoice (also saves to localStorage)
-    generateAndEmailInvoice(paymentInfo, [...cart], total);
-        
-   
-    function showUserFrequency(){
 
-    }
-        
-    // Reset forms
-    const desktopSelect = document.getElementById("paymentMethodDesktop");
-    const mobileSelect = document.getElementById("paymentMethodMobile");
-    if (desktopSelect) desktopSelect.value = "creditCard";
-    if (mobileSelect) mobileSelect.value = "creditCard";
-    toggleForm();
-        
-    if (cartContainer) cartContainer.innerHTML = "";
-        
-    // Clear form fields
-    const allInputs = document.querySelectorAll("input");
-    allInputs.forEach(input => {
-        input.value = "";
-    });
+        const paymentInfo = getPaymentMethodInfo();
+        const total = updateTotal();
 
-    // Clear cart
-    cart = [];
-    if (typeof saveCart === 'function') {
-        saveCart();
+        // Generate and display invoice
+        generateAndEmailInvoice(paymentInfo, [...cart], total);
+
+        // Clear cart after successful order
+        cart = [];
+        if (typeof saveCart === 'function') {
+            saveCart();
+        }
+
+        // Reset UI
+        if (cartContainer) cartContainer.innerHTML = "";
+        const allInputs = document.querySelectorAll("input");
+        allInputs.forEach(input => input.value = "");
+
+        const desktopSelect = document.getElementById("paymentMethodDesktop");
+        const mobileSelect = document.getElementById("paymentMethodMobile");
+        if (desktopSelect) desktopSelect.value = "creditCard";
+        if (mobileSelect) mobileSelect.value = "creditCard";
+        toggleForm();
     }
 
     // Cancel button function
