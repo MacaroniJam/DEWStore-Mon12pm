@@ -79,35 +79,15 @@ document.addEventListener("DOMContentLoaded", () => {
             name = document.getElementById("creditCardName")?.value || "";
             number = document.getElementById("creditCardNumber")?.value || "";
             expiration = document.getElementById("creditCardExpiration")?.value || "";
-            address = document.getElementById("creditCardBillingAddress")?.value || "";
-            city = document.getElementById("creditCardCity")?.value || "";
-            zip = document.getElementById("creditCardBillingZip")?.value || "";
-            email = document.getElementById("creditCardEmail")?.value || "";
-            trn = document.getElementById("creditCardTRN")?.value || "";
-            invoiceDate = document.getElementById("creditCardInvoiceDate")?.value || "";
-            invoiceNumber = document.getElementById("creditCardInvoiceNumber")?.value || "";
+            
         } else if (paymentMethod === "debitCard") {
             name = document.getElementById("debitCardName")?.value || "";
             number = document.getElementById("debitCardNumber")?.value || "";
             expiration = document.getElementById("debitCardExpiration")?.value || "";
-            address = document.getElementById("debitCardBillingAddress")?.value || "";
-            city = document.getElementById("debitCardCity")?.value || "";
-            zip = document.getElementById("debitCardBillingZip")?.value || "";
-            email = document.getElementById("debitCardEmail")?.value || "";
-            trn = document.getElementById("debitCardTRN")?.value || "";
-            invoiceDate = document.getElementById("debitCardInvoiceDate")?.value || "";
-            invoiceNumber = document.getElementById("debitCardInvoiceNumber")?.value || "";
+           
         } else if (paymentMethod === "paypal") {
-            const firstName = document.getElementById("paypalFname")?.value || "";
-            const lastName = document.getElementById("paypalLname")?.value || "";
-            name = `${firstName} ${lastName}`.trim();
-            address = document.getElementById("paypalAddress")?.value || "";
-            city = document.getElementById("paypalCity")?.value || "";
-            zip = document.getElementById("paypalZip")?.value || "";
             email = document.getElementById("paypalEmail")?.value || "";
-            trn = document.getElementById("paypalTRN")?.value || "";
-            invoiceDate = document.getElementById("paypalInvoiceDate")?.value || "";
-            invoiceNumber = document.getElementById("paypalInvoiceNumber")?.value || "";
+           
         }
         
         const fullAddress = `${address}, ${city}, ${zip}`;
@@ -128,10 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return `INV-${timestamp}-${random}`;
     }
 
-    // Generate TRN if not provided
-    function generateTRN() {
-        return `TRN-${Math.floor(Math.random() * 1000000000)}`;
-    }
 
     // Save invoice to localStorage
     function saveInvoiceToStorage(invoice) {
@@ -165,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Use provided invoice number/TRN or generate new ones
         const finalInvoiceNumber = shippingInfo.invoiceNumber || generateInvoiceNumber();
-        const finalTRN = shippingInfo.trn || generateTRN();
+        const finalTRN = shippingInfo.trn 
         const finalInvoiceDate = shippingInfo.invoiceDate || new Date().toLocaleString();
         
         const purchasedItems = cartItems.map(gameId => {
@@ -317,7 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         if (paymentMethod === "creditCard") {
-            const required = ["creditCardName", "creditCardBillingAddress", "creditCardCity", "creditCardBillingZip", "creditCardTRN", "creditCardInvoiceDate", "creditCardNumber", "creditCardEmail"];
+            const required = ["creditCardName", "creditCardNumber", "creditCardExpiration"];
             for (let id of required) {
                 if (!document.getElementById(id)?.value) {
                     alert("Please fill in all credit card fields.");
@@ -325,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         } else if (paymentMethod === "debitCard") {
-            const required = ["debitCardName", "debitCardBillingAddress", "debitCardCity", "debitCardBillingZip", "debitCardTRN", "debitCardInvoiceDate", "debitCardInvoiceNumber", "debitCardEmail"];
+            const required = ["debitCardName", "debitCardNumber", "debitCardExpiration"];
             for (let id of required) {
                 if (!document.getElementById(id)?.value) {
                     alert("Please fill in all debit card fields.");
@@ -344,6 +320,14 @@ document.addEventListener("DOMContentLoaded", () => {
         
         return true;
     }
+
+    const placeOrderButton = document.getElementById("placeOrder");
+    if (placeOrderButton) {
+        placeOrderButton.addEventListener("click", processOrder);
+    }
+
+    
+    updateTotal();
 
     // Process order and generate invoice
     function processOrder() {
@@ -368,12 +352,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Generate and display invoice (also saves to localStorage)
     generateAndShipInvoice(shippingInfo, [...cart], total);
         
-    // Clear cart
-    cart = [];
-    if (typeof saveCart === 'function') {
-        saveCart();
+   
+    function showUserFrequency(){
+
     }
-    updateTotal();
         
     // Reset forms
     const desktopSelect = document.getElementById("paymentMethodDesktop");
@@ -390,22 +372,26 @@ document.addEventListener("DOMContentLoaded", () => {
         input.value = "";
     });
 
+    // Clear cart
+    cart = [];
+    if (typeof saveCart === 'function') {
+        saveCart();
+    }
+
     // Cancel button function
     function goBackToCart() {
         window.location.href = "cart.html";
     }
 
     // Event listeners for buttons and invoice
-    const placeOrderButton = document.getElementById("placeOrder");
-    if (placeOrderButton) {
-        placeOrderButton.addEventListener("click", processOrder);
-    }
+   
     
-    const cancelButton = document.getElementById("cancelCheckout");
+    /*const cancelButton = document.getElementById("cancelCheckout");
     if (cancelButton) {
         cancelButton.addEventListener("click", goBackToCart);
     }
     
+
     const closeInvoiceBtn = document.getElementById("closeInvoice");
     if (closeInvoiceBtn) {
         closeInvoiceBtn.addEventListener("click", () => {
@@ -414,7 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 invoiceDisplay.style.display = "none";
             }
         });
-    }
+    }*/
     
     window.addEventListener("click", (event) => {
         const invoiceDisplay = document.getElementById("invoiceDisplay");
