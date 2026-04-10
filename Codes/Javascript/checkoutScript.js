@@ -333,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         } else if (paymentMethod === "paypal") {
-            const required = ["paypalFname", "paypalLname", "paypalAddress", "paypalCity", "paypalZip", "paypalTRN", "paypalInvoiceDate", "paypalInvoiceNumber", "paypalEmail"];
+            const required = [ "paypalEmail"];
             for (let id of required) {
                 if (!document.getElementById(id)?.value) {
                     alert("Please fill in all PayPal fields.");
@@ -352,7 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         
-        if (!validateForm()) {
+        if (!validatePaymentForm()) {
             return;
         }
         
@@ -360,34 +360,35 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         
-        const shippingInfo = getShippingInfo();
-        const total = updateTotal();
-        
-        // Generate and display invoice (also saves to localStorage)
-        generateAndShipInvoice(shippingInfo, [...cart], total);
-        
-        // Clear cart
-        cart = [];
-        if (typeof saveCart === 'function') {
-            saveCart();
-        }
-        updateTotal();
-        
-        // Reset forms
-        const desktopSelect = document.getElementById("paymentMethodDesktop");
-        const mobileSelect = document.getElementById("paymentMethodMobile");
-        if (desktopSelect) desktopSelect.value = "creditCard";
-        if (mobileSelect) mobileSelect.value = "creditCard";
-        toggleForm();
-        
-        if (cartContainer) cartContainer.innerHTML = "";
-        
-        // Clear form fields
-        const allInputs = document.querySelectorAll("input");
-        allInputs.forEach(input => {
-            input.value = "";
-        });
+       
     }
+    const shippingInfo = getShippingInfo();
+    const total = updateTotal();
+        
+    // Generate and display invoice (also saves to localStorage)
+    generateAndShipInvoice(shippingInfo, [...cart], total);
+        
+    // Clear cart
+    cart = [];
+    if (typeof saveCart === 'function') {
+        saveCart();
+    }
+    updateTotal();
+        
+    // Reset forms
+    const desktopSelect = document.getElementById("paymentMethodDesktop");
+    const mobileSelect = document.getElementById("paymentMethodMobile");
+    if (desktopSelect) desktopSelect.value = "creditCard";
+    if (mobileSelect) mobileSelect.value = "creditCard";
+    toggleForm();
+        
+    if (cartContainer) cartContainer.innerHTML = "";
+        
+    // Clear form fields
+    const allInputs = document.querySelectorAll("input");
+    allInputs.forEach(input => {
+        input.value = "";
+    });
 
     // Cancel button function
     function goBackToCart() {
