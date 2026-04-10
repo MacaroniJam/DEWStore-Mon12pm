@@ -69,11 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("paymentMethodMobile").addEventListener("change", toggleForm);
     toggleForm();
 
-    // Get shipping information from the active form
-    function getShippingInfo() {
+    // Get payment method information from the active form
+    function getPaymentMethodInfo() {
         const paymentMethod = document.getElementById("paymentMethodDesktop")?.value || document.getElementById("paymentMethodMobile")?.value;
         
-        let name = "", address = "", city = "", zip = "", email = "", trn = "", invoiceDate = "", invoiceNumber = "";
+        let name = "", number = "", expiration = "", email = "";
         
         if (paymentMethod === "creditCard") {
             name = document.getElementById("creditCardName")?.value || "";
@@ -90,9 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
            
         }
         
-        const fullAddress = `${address}, ${city}, ${zip}`;
-        
-        return { name, number, expiration, address: fullAddress, zip, email, trn, invoiceDate, invoiceNumber };
+        return { name, number, expiration, email, trn};
     }
 
     // Calculate taxes (assume 15% tax rate)
@@ -133,16 +131,18 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(`Email sent to: ${email} with Invoice #${invoiceNumber}`);
     }
 
-    // Generate and ship invoice
-    function generateAndShipInvoice(shippingInfo, cartItems, totalCost) {
+    // Generate and email invoice
+    function generateAndEmailInvoice(paymentMethodInfo, cartItems, totalCost) {
         const subtotal = totalCost;
         const taxes = calculateTaxes(subtotal);
         const totalWithTax = subtotal + taxes;
+        const registrationData = getRegistrationData(); // From mainScript.js
+
         
         // Use provided invoice number/TRN or generate new ones
-        const finalInvoiceNumber = shippingInfo.invoiceNumber || generateInvoiceNumber();
-        const finalTRN = shippingInfo.trn 
-        const finalInvoiceDate = shippingInfo.invoiceDate || new Date().toLocaleString();
+        const finalInvoiceNumber =  generateInvoiceNumber();
+        const finalTRN = registrationData.trn
+        const finalInvoiceDate = paymentMethodInfo.invoiceDate || new Date().toLocaleString();
         
         const purchasedItems = cartItems.map(gameId => {
             const game = games.find(g => g.id === gameId);
@@ -161,12 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
             trn: finalTRN,
             companyName: "D.E.W Store",
             date: finalInvoiceDate,
-            shippingInfo: {
-                name: shippingInfo.name,
-                address: shippingInfo.address,
-                zip: shippingInfo.zip,
-                email: shippingInfo.email
-            },
+           
             purchasedItems: purchasedItems,
             subtotal: `$${subtotal.toFixed(2)}`,
             taxes: `$${taxes.toFixed(2)}`,
@@ -200,21 +195,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
                 
-                <div class="shipping-info">
-                    <h4>Shipping Information</h4>
-                    <div class="detail-row">
-                        <span class="detail-label">Name:</span>
-                        <span class="detail-value">${shippingInfo.name}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Address:</span>
-                        <span class="detail-value">${shippingInfo.address}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Email:</span>
-                        <span class="detail-value">${shippingInfo.email}</span>
-                    </div>
-                </div>
                 
                 <table class="invoice-table">
                     <thead>
@@ -278,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         // Show email sent message (using alert for reliability)
-        showEmailSentMessage(shippingInfo.email, finalInvoiceNumber);
+        showEmailSentMessage(paymentMethodInfo.email, finalInvoiceNumber);
         
         return invoice;
     }
@@ -331,6 +311,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Process order and generate invoice
     function processOrder() {
+        
+        
         if (cart.length === 0) {
             alert("Your cart is empty!");
             return;
@@ -341,16 +323,32 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         if (!confirm("Are you sure you want to place the order?")) {
+            const paymentInfo = getPaymentMethodInfo();
+            const total = updateTotal();
+
+            // Generate and display invoice
+            generateAndEmailInvoice(paymentInfo, [...cart], total);
+
+            // Clear cart after successful order
+            cart = [];
+            if (typeof saveCart === 'function') {
+                saveCart();
+            }
+
+            // Reset UI
+            if (cartContainer) cartContainer.innerHTML = "";
+            const allInputs = document.querySelectorAll("input");
+            allInputs.forEach(input => input.value = "");
             return;
         }
         
        
     }
-    const shippingInfo = getShippingInfo();
+    const paymentInfo = getPaymentMethodInfo();
     const total = updateTotal();
         
     // Generate and display invoice (also saves to localStorage)
-    generateAndShipInvoice(shippingInfo, [...cart], total);
+    generateAndEmailInvoice(paymentInfo, [...cart], total);
         
    
     function showUserFrequency(){
