@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.E.W Store - Invoices</title>
+    <link rel="stylesheet" href="../Styles/NavBarStyle.css" type="text/css">
+    <link rel="stylesheet" href="../Styles/InvoicesStyle.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="Javascript/mainScript.js" defer></script>
+    <script src="Javascript/invoicesScript.js" defer></script>
+</head>
+<body>
+    <header>
+        <div>
+            <img src="../Assets/Images/DEWLogo.png" alt="D.E.W Store Logo">
+            <h1>D.E.W Store</h1>
+        </div>
+        <nav id="nav-links"></nav>
+    </header>
+
+    <main>
+        <h1>My Invoices</h1>
+        <div class="invoice-controls">
+            <button id="viewAllInvoices">View All Invoices</button>
+            <div class="invoice-search">
+                <input type="text" id="searchTRN" placeholder="Enter TRN to search">
+                <button id="searchInvoices">Search</button>
+            </div>
+        </div>
+        <div id="invoiceListContainer" class="invoice-list"></div>
+    </main>
+</body>
+</html>
