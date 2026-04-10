@@ -317,7 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         if (paymentMethod === "creditCard") {
-            const required = ["creditCardName", "creditCardBillingAddress", "creditCardCity", "creditCardBillingZip", "creditCardTRN", "creditCardInvoiceDate", "creditCardInvoiceNumber", "creditCardEmail"];
+            const required = ["creditCardName", "creditCardBillingAddress", "creditCardCity", "creditCardBillingZip", "creditCardTRN", "creditCardInvoiceDate", "creditCardNumber", "creditCardEmail"];
             for (let id of required) {
                 if (!document.getElementById(id)?.value) {
                     alert("Please fill in all credit card fields.");
