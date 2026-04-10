@@ -40,7 +40,7 @@
                 </select>
                 
                 <!-- CREDIT CARD FORM -->
-                <form id="creditCardForm">
+                <form id="creditCardForm" onsubmit="validatePaymentForm(event)">
                     <h1>Credit Card Information</h1>
                     <div class="inputFields">
                         <div class="field">
@@ -64,7 +64,7 @@
                 </form>
 
                 <!-- DEBIT CARD FORM -->
-                <form id="debitCardForm" style="display: none;">
+                <form id="debitCardForm" style="display: none;" onsubmit="validatePaymentForm(event)">
                     <h1>Debit Card Information</h1>
                     <div class="inputFields">
                         <div class="field">
@@ -86,7 +86,7 @@
                 </form>
 
                 <!-- PAYPAL FORM -->
-                <form id="paypalForm" style="display: none;">
+                <form id="paypalForm" style="display: none;" onsubmit="validatePaymentForm(event)">
                     <h1>PayPal Information</h1>
                     <div class="inputFields">
                         <div class="field">

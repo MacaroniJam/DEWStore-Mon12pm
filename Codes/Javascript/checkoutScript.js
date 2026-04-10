@@ -308,7 +308,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Validate form fields
-    function validatePaymentForm() {
+    function validatePaymentForm(event) {
         const paymentMethod = document.getElementById("paymentMethodDesktop")?.value || document.getElementById("paymentMethodMobile")?.value;
         
         if (!paymentMethod || paymentMethod === "" || paymentMethod === "selected") {
