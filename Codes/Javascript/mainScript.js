@@ -150,7 +150,6 @@ function updateNav() {
             <a href="cart.html">Cart</a>
             <a href="checkout.html">Checkout</a>
             <a href="invoices.html">Invoices</a>
-            <a href="dashboard.html">Dashboard</a>
             <a href="aboutus.html">About Us</a>
             <a href="#" id="logout">Logout</a>
         `;
