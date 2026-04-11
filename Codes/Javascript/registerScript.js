@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const confirmPasswordInput = document.getElementById("confirmPassword");
     const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
 
-    //Toggle password visibility for both password and confirm password fields
+    // Toggles password visibility for the registration form fields.
     eye.addEventListener("click", () => {
         const type = passwordInput.type === "password" ? "text" : "password";
         passwordInput.type = type;
@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// Calculates age from the selected date of birth.
 function calculateAge(dateOfBirth) {
     const today = new Date();
     const birthDate = new Date(dateOfBirth);
@@ -32,7 +33,7 @@ function calculateAge(dateOfBirth) {
     return age;
 }
 
-// Form validation to check all required registration rules before allowing form submission
+// Validates the registration form and saves a new record to RegistrationData.
 function validateForm(event) {
     event.preventDefault();
 
@@ -44,6 +45,7 @@ function validateForm(event) {
             return false;
         }
 
+        // Gets all values entered in the registration form.
         const firstName = document.getElementById("firstName").value.trim();
         const lastName = document.getElementById("lastName").value.trim();
         const dateOfBirth = document.getElementById("dateOfBirth").value;
@@ -75,6 +77,7 @@ function validateForm(event) {
             return false;
         }
 
+        // Checks that the TRN is not already in use.
         const registrationData = getRegistrationData();
         const trnExists = registrationData.some((record) => record.trn === trn);
 
@@ -83,6 +86,7 @@ function validateForm(event) {
             return false;
         }
 
+        // Creates the new registration object to store.
         const registrationRecord = {
             firstName: firstName,
             lastName: lastName,
@@ -97,6 +101,7 @@ function validateForm(event) {
             invoices: []
         };
 
+        // Adds the new record to the saved registration list.
         registrationData.push(registrationRecord);
         saveRegistrationData(registrationData);
 

@@ -1,8 +1,10 @@
 // saving username and login status in session storage for use across pages, will be cleared when browser is closed
 var username = sessionStorage.getItem("username") || "";
 var loggedIn = sessionStorage.getItem("loggedIn") === "true";
+
 let usernameDiv = null;
 
+// Reads all saved registration records from localStorage.
 function getRegistrationData() {
     const storedRegistrationData = localStorage.getItem("RegistrationData");
 
@@ -19,6 +21,7 @@ function getRegistrationData() {
     return registrationData;
 }
 
+// Saves the full registration record list back to localStorage.
 function saveRegistrationData(registrationData) {
     localStorage.setItem("RegistrationData", JSON.stringify(registrationData));
 }
@@ -148,6 +151,7 @@ function updateNav() {
             <a href="games.html">Games</a>
             <a href="cart.html">Cart</a>
             <a href="checkout.html">Checkout</a>
+            <a href="invoices.html">Invoices</a>
             <a href="aboutus.html">About Us</a>
             <a href="#" id="logout">Logout</a>
         `;
@@ -170,6 +174,7 @@ function updateNav() {
             
             sessionStorage.removeItem("username");
             sessionStorage.removeItem("loggedIn");
+            sessionStorage.removeItem("currentTRN");
 
             loggedIn = false;
             username = null;
@@ -194,6 +199,7 @@ function updateNav() {
 }
 
 function SetUsername(name) {
+    // Stores the display name used in the header after login.
     username = name;
     sessionStorage.setItem("username", name);
     sessionStorage.setItem("loggedIn", "true");
