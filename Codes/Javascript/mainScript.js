@@ -4,7 +4,9 @@ var loggedIn = sessionStorage.getItem("loggedIn") === "true";
 
 let usernameDiv = null;
 
-// Reads all saved registration records from localStorage.
+/* Question 1. User Authentication (LocalStorage)
+   Shared RegistrationData functions used by registration, login, and reset password.
+*/
 function getRegistrationData() {
     const storedRegistrationData = localStorage.getItem("RegistrationData");
 
@@ -21,7 +23,7 @@ function getRegistrationData() {
     return registrationData;
 }
 
-// Saves the full registration record list back to localStorage.
+// Saves the updated RegistrationData array back to localStorage.
 function saveRegistrationData(registrationData) {
     localStorage.setItem("RegistrationData", JSON.stringify(registrationData));
 }
@@ -199,7 +201,9 @@ function updateNav() {
 }
 
 function SetUsername(name) {
-    // Stores the display name used in the header after login.
+    /* Question 1a. Login Page
+       Shows the logged-in user's first and last name in the top corner.
+    */
     username = name;
     sessionStorage.setItem("username", name);
     sessionStorage.setItem("loggedIn", "true");

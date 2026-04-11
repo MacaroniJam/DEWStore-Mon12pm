@@ -19,7 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// Calculates age from the selected date of birth.
+/* Question 1a. Registration Page
+   Visitor must be over 18 years old to register. Calculate age using JavaScript.
+*/
 function calculateAge(dateOfBirth) {
     const today = new Date();
     const birthDate = new Date(dateOfBirth);
@@ -33,7 +35,15 @@ function calculateAge(dateOfBirth) {
     return age;
 }
 
-// Validates the registration form and saves a new record to RegistrationData.
+/* Question 1a. Registration Page
+   i. Create a registration form for first name, last name, date of birth, gender,
+      phone number, email, TRN, and password.
+   ii. Validate required fields with HTML validation and JavaScript error handling.
+   iii. Password must be at least 8 characters long.
+   iv. Visitor must be over 18 years old.
+   v. TRN must be unique and match the format 000-000-000.
+   vi. Store each registration record in localStorage as RegistrationData.
+*/
 function validateForm(event) {
     event.preventDefault();
 
@@ -45,7 +55,7 @@ function validateForm(event) {
             return false;
         }
 
-        // Gets all values entered in the registration form.
+        // Question 1a ii. Get all values entered in the registration form.
         const firstName = document.getElementById("firstName").value.trim();
         const lastName = document.getElementById("lastName").value.trim();
         const dateOfBirth = document.getElementById("dateOfBirth").value;
@@ -77,7 +87,7 @@ function validateForm(event) {
             return false;
         }
 
-        // Checks that the TRN is not already in use.
+        // Question 1a v. Check that the TRN is unique before saving.
         const registrationData = getRegistrationData();
         const trnExists = registrationData.some((record) => record.trn === trn);
 
@@ -86,7 +96,7 @@ function validateForm(event) {
             return false;
         }
 
-        // Creates the new registration object to store.
+        // Question 1a vi. Create the registration object to store.
         const registrationRecord = {
             firstName: firstName,
             lastName: lastName,
@@ -101,7 +111,7 @@ function validateForm(event) {
             invoices: []
         };
 
-        // Adds the new record to the saved registration list.
+        // Question 1a vi. Append the new record to RegistrationData.
         registrationData.push(registrationRecord);
         saveRegistrationData(registrationData);
 

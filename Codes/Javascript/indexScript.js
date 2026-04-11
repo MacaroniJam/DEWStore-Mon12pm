@@ -18,7 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Checks the entered TRN and password against RegistrationData.
+/* Question 1a. Login Page
+   i. Create a login form where visitors can enter their TRN and password.
+   ii. Validate the entered TRN and password against RegistrationData.
+   iii. Give the visitor three attempts, then redirect to the account locked page.
+*/
 function login(event) {
     event.preventDefault();
 
@@ -30,14 +34,14 @@ function login(event) {
             return false;
         }
 
-        // Gets the login details entered by the visitor.
+        // Question 1a ii. Get the entered TRN and password from the login form.
         const trn = document.getElementById("trn").value.trim();
         const password = document.getElementById("password").value;
         const registrationData = getRegistrationData();
         const registeredUser = registrationData.find((record) => record.trn === trn && record.password === password);
 
         if (!registeredUser) {
-            // Tracks failed attempts and locks the account page after three tries.
+            // Question 1a iii. Track failed attempts and lock after three tries.
             const attempts = Number(sessionStorage.getItem("loginAttempts")) || 0;
             const updatedAttempts = attempts + 1;
             sessionStorage.setItem("loginAttempts", updatedAttempts);
@@ -51,7 +55,7 @@ function login(event) {
             return false;
         }
 
-        // Uses the person's first and last name in the top corner after login.
+        // Question 1a iii. If login is successful, redirect to the product catalog.
         sessionStorage.removeItem("loginAttempts");
         const displayName = [registeredUser.firstName, registeredUser.lastName].filter(Boolean).join(" ") || registeredUser.trn;
         sessionStorage.setItem("currentTRN", registeredUser.trn);
