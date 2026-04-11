@@ -1,0 +1,135 @@
+@font-face {
+  font-family: NeueHaasDisplayMedium;
+  src: url(../Assets/Fonts/NeueHaasDisplayMedium.ttf);
+}
+
+@font-face {
+  font-family: NeueHaasDisplayRoman;
+  src: url(../Assets/Fonts/NeueHaasDisplayRoman.ttf);
+}
+
+/* Page background */
+body {
+  background-color: rgb(0, 9, 24);
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-family: NeueHaasDisplayRoman;
+}
+
+/* Main content area */
+main {
+  margin-top: 55px;
+  min-height: calc(100vh - 55px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Page title */
+main h1 {
+  font-family: NeueHaasDisplayMedium;
+  font-size: clamp(30px, 2.5vw, 40px);
+  background-color: rgb(4, 92, 180);
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Controls (buttons + search bar) */
+.invoice-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 900px;
+  justify-content: space-between;
+}
+
+.invoice-controls button {
+  background-color: rgb(2, 79, 161);
+  color: white;
+  font-family: NeueHaasDisplayMedium;
+  border: none;
+  padding: 10px 20px;
+  font-size: clamp(16px, 2vw, 20px);
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.invoice-search {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+  min-width: 220px;
+}
+
+.invoice-search input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 9, 24, 0.9);
+  color: white;
+  font-family: NeueHaasDisplayRoman;
+}
+
+.invoice-search input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Invoice list container */
+.invoice-list {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Individual invoice card */
+.invoice-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.invoice-card h3 {
+  font-family: NeueHaasDisplayMedium;
+  margin: 0 0 12px;
+  font-size: clamp(18px, 2vw, 22px);
+}
+
+.invoice-card p {
+  margin: 6px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 768px) {
+  .invoice-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .invoice-search {
+    flex-direction: column;
+  }
+
+  .invoice-card {
+    padding: 16px;
+  }
+
+  .invoice-card h3 {
+    font-size: 18px;
+  }
+
+  .invoice-card p {
+    font-size: 13px;
+  }
+}
