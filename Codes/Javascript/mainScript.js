@@ -4,6 +4,7 @@ var loggedIn = sessionStorage.getItem("loggedIn") === "true";
 
 let usernameDiv = null;
 
+// Reads all saved registration records from localStorage.
 function getRegistrationData() {
     const storedRegistrationData = localStorage.getItem("RegistrationData");
 
@@ -20,6 +21,7 @@ function getRegistrationData() {
     return registrationData;
 }
 
+// Saves the full registration record list back to localStorage.
 function saveRegistrationData(registrationData) {
     localStorage.setItem("RegistrationData", JSON.stringify(registrationData));
 }
@@ -197,6 +199,7 @@ function updateNav() {
 }
 
 function SetUsername(name) {
+    // Stores the display name used in the header after login.
     username = name;
     sessionStorage.setItem("username", name);
     sessionStorage.setItem("loggedIn", "true");

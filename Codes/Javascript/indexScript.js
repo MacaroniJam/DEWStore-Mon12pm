@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.replace('games.html');
     }
 
-    // Toggle password visibility
+    // Toggle password visibility on the login form.
     const passwordInput = document.getElementById("password");
     const eye = document.getElementById("togglePassword");
 
@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// Checks the entered TRN and password against RegistrationData.
 function login(event) {
     event.preventDefault();
 
@@ -29,12 +30,14 @@ function login(event) {
             return false;
         }
 
+        // Gets the login details entered by the visitor.
         const trn = document.getElementById("trn").value.trim();
         const password = document.getElementById("password").value;
         const registrationData = getRegistrationData();
         const registeredUser = registrationData.find((record) => record.trn === trn && record.password === password);
 
         if (!registeredUser) {
+            // Tracks failed attempts and locks the account page after three tries.
             const attempts = Number(sessionStorage.getItem("loginAttempts")) || 0;
             const updatedAttempts = attempts + 1;
             sessionStorage.setItem("loginAttempts", updatedAttempts);
@@ -48,6 +51,7 @@ function login(event) {
             return false;
         }
 
+        // Uses the person's first and last name in the top corner after login.
         sessionStorage.removeItem("loginAttempts");
         const displayName = [registeredUser.firstName, registeredUser.lastName].filter(Boolean).join(" ") || registeredUser.trn;
         sessionStorage.setItem("currentTRN", registeredUser.trn);
