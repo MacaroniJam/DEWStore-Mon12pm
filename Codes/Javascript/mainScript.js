@@ -269,6 +269,14 @@ function removeFromCart(gameId) {
 }
 
 
+function ShowInvoices(){
+    const allInvoices = JSON.parse(localStorage.getItem("AllInvoices")) || [];
+    console.log("All registered invoices:", allInvoices);
+}
+
+
+document.addEventListener("DOMContentLoaded", ShowInvoices);
+
 
 
 
