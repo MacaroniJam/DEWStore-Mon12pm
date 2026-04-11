@@ -1,7 +1,18 @@
+/*
+    Figure 5 Checkout Javascript
+    Show a summary of the shopping cart with the total cost.
+    Allow the user to enter their shipping details (e.g., name, address, amount being paid).
+    When the user confirms the checkout, generate an invoice. 
+    Include:
+    Confirm button (confirms the checkout)
+*/
 document.addEventListener("DOMContentLoaded", () => {
-    // Placing all cart items in the checkout page
+    // -------------------------------
+    // CART DISPLAY
+    // -------------------------------
     const cartContainer = document.getElementById("cartContainer");
 
+    // Show all items currently in the cart
     cart.forEach(gameId => {
         const game = games.find(g => g.id === gameId);
         if (!game) return;
@@ -19,191 +30,173 @@ document.addEventListener("DOMContentLoaded", () => {
         cartContainer.appendChild(cartItem);
     });
 
-    // Update total price
+    // -------------------------------
+    // TOTAL PRICE CALCULATION
+    // -------------------------------
     function updateTotal() {
         let total = 0;
+
+        // Add up all item prices
         cart.forEach(gameId => {
             const game = games.find(g => g.id === gameId);
             if (!game) return;
             total += parseFloat(game.price.replace("$", ""));
         });
+
+        // Update UI with total
         document.getElementById("totalPrice").textContent = `$${total.toFixed(2)}`;
-        
+
+        // Update hidden fields if needed
         const amountFields = document.querySelectorAll(".amountTotal");
         amountFields.forEach(field => {
             field.value = `$${total.toFixed(2)}`;
         });
+
         return total;
     }
-    
     updateTotal();
-    
+
+    // -------------------------------
+    // PAYMENT METHOD TOGGLE
+    // -------------------------------
     function toggleForm() {
         const desktopSelect = document.getElementById("paymentMethodDesktop");
         const mobileSelect = document.getElementById("paymentMethodMobile");
 
+        // Sync dropdowns between desktop and mobile
         let paymentMethod = desktopSelect.value;
-        if (!paymentMethod || paymentMethod === "" || paymentMethod === "selected") paymentMethod = mobileSelect.value;
+        if (!paymentMethod || paymentMethod === "" || paymentMethod === "selected") {
+            paymentMethod = mobileSelect.value;
+        }
 
         if (desktopSelect.value !== paymentMethod && paymentMethod) desktopSelect.value = paymentMethod;
         if (mobileSelect.value !== paymentMethod && paymentMethod) mobileSelect.value = paymentMethod;
 
+        // Hide all forms first
         const creditCardForm = document.getElementById("creditCardForm");
         const debitCardForm = document.getElementById("debitCardForm");
         const paypalForm = document.getElementById("paypalForm");
-        
+
         if (creditCardForm) creditCardForm.style.display = "none";
         if (debitCardForm) debitCardForm.style.display = "none";
         if (paypalForm) paypalForm.style.display = "none";
 
-        if (paymentMethod === "creditCard") {
-            if (creditCardForm) creditCardForm.style.display = "block";
-        } else if (paymentMethod === "debitCard") {
-            if (debitCardForm) debitCardForm.style.display = "block";
-        } else if (paymentMethod === "paypal") {
-            if (paypalForm) paypalForm.style.display = "block";
-        }
+        // Show selected form
+        if (paymentMethod === "creditCard" && creditCardForm) creditCardForm.style.display = "block";
+        else if (paymentMethod === "debitCard" && debitCardForm) debitCardForm.style.display = "block";
+        else if (paymentMethod === "paypal" && paypalForm) paypalForm.style.display = "block";
     }
 
     document.getElementById("paymentMethodDesktop").addEventListener("change", toggleForm);
     document.getElementById("paymentMethodMobile").addEventListener("change", toggleForm);
     toggleForm();
 
-    // Get shipping information from the active form
-    function getShippingInfo() {
+    // -------------------------------
+    // PAYMENT INFO COLLECTION
+    // -------------------------------
+    function getPaymentMethodInfo() {
         const paymentMethod = document.getElementById("paymentMethodDesktop")?.value || document.getElementById("paymentMethodMobile")?.value;
-        
-        let name = "", address = "", city = "", zip = "", email = "", trn = "", invoiceDate = "", invoiceNumber = "";
-        
+
+        let name = "", number = "", expiration = "", email = "";
+        const trn = sessionStorage.getItem("currentTRN") || "";
+
+        // Collect fields based on selected method
         if (paymentMethod === "creditCard") {
             name = document.getElementById("creditCardName")?.value || "";
             number = document.getElementById("creditCardNumber")?.value || "";
             expiration = document.getElementById("creditCardExpiration")?.value || "";
-            address = document.getElementById("creditCardBillingAddress")?.value || "";
-            city = document.getElementById("creditCardCity")?.value || "";
-            zip = document.getElementById("creditCardBillingZip")?.value || "";
             email = document.getElementById("creditCardEmail")?.value || "";
-            trn = document.getElementById("creditCardTRN")?.value || "";
-            invoiceDate = document.getElementById("creditCardInvoiceDate")?.value || "";
-            invoiceNumber = document.getElementById("creditCardInvoiceNumber")?.value || "";
         } else if (paymentMethod === "debitCard") {
             name = document.getElementById("debitCardName")?.value || "";
             number = document.getElementById("debitCardNumber")?.value || "";
             expiration = document.getElementById("debitCardExpiration")?.value || "";
-            address = document.getElementById("debitCardBillingAddress")?.value || "";
-            city = document.getElementById("debitCardCity")?.value || "";
-            zip = document.getElementById("debitCardBillingZip")?.value || "";
             email = document.getElementById("debitCardEmail")?.value || "";
-            trn = document.getElementById("debitCardTRN")?.value || "";
-            invoiceDate = document.getElementById("debitCardInvoiceDate")?.value || "";
-            invoiceNumber = document.getElementById("debitCardInvoiceNumber")?.value || "";
         } else if (paymentMethod === "paypal") {
-            const firstName = document.getElementById("paypalFname")?.value || "";
-            const lastName = document.getElementById("paypalLname")?.value || "";
-            name = `${firstName} ${lastName}`.trim();
-            address = document.getElementById("paypalAddress")?.value || "";
-            city = document.getElementById("paypalCity")?.value || "";
-            zip = document.getElementById("paypalZip")?.value || "";
             email = document.getElementById("paypalEmail")?.value || "";
-            trn = document.getElementById("paypalTRN")?.value || "";
-            invoiceDate = document.getElementById("paypalInvoiceDate")?.value || "";
-            invoiceNumber = document.getElementById("paypalInvoiceNumber")?.value || "";
         }
-        
-        const fullAddress = `${address}, ${city}, ${zip}`;
-        
-        return { name, number, expiration, address: fullAddress, zip, email, trn, invoiceDate, invoiceNumber };
+
+        return { paymentMethod, name, number, expiration, email, trn };
     }
 
-    // Calculate taxes (assume 15% tax rate)
+    // -------------------------------
+    // TAXES & INVOICE NUMBER
+    // -------------------------------
     function calculateTaxes(subtotal) {
-        const taxRate = 0.15;
-        return subtotal * taxRate;
+        return subtotal * 0.15; // 15% tax
     }
 
-    // Generate unique invoice number if not provided
-    function generateInvoiceNumber() {
-        const timestamp = Date.now();
-        const random = Math.floor(Math.random() * 10000);
-        return `INV-${timestamp}-${random}`;
+    function getNextInvoiceNumber() {
+        const lastNumber = Number(localStorage.getItem("LastInvoiceNumber") || "0");
+        const nextNumber = lastNumber + 1;
+        localStorage.setItem("LastInvoiceNumber", String(nextNumber));
+        return String(nextNumber).padStart(3, "0");
     }
 
-    // Generate TRN if not provided
-    function generateTRN() {
-        return `TRN-${Math.floor(Math.random() * 1000000000)}`;
-    }
-
-    // Save invoice to localStorage
+    // -------------------------------
+    // INVOICE STORAGE
+    // -------------------------------
     function saveInvoiceToStorage(invoice) {
         let allInvoices = JSON.parse(localStorage.getItem("AllInvoices")) || [];
         allInvoices.push(invoice);
         localStorage.setItem("AllInvoices", JSON.stringify(allInvoices));
-        console.log("Invoice saved to localStorage:", invoice);
         return allInvoices;
     }
-    /* This is to find and retrieve the invoice from localStorage using user's input of their TRN
-    function findInvoiceByTRN(trn) {
-        const allInvoices = JSON.parse(localStorage.getItem("AllInvoices")) || [];
-        return allInvoices.find(inv => inv.trn === trn);
-    }
-    */
 
-    // Simple alert for email sent
-    function showEmailSentMessage(email, invoiceNumber) {
-        // Use mailto link to open user's email client with pre-filled email
-        window.location.href = `mailto:${email}?subject=Your Invoice from D.E.W Store&body=Thank you for your purchase! Your invoice number is ${invoiceNumber}. If you have any questions, please contact our support team.`;
+    // -------------------------------
+    // INVOICE POPUP DISPLAY
+    // -------------------------------
+    function showRecentInvoice(invoiceHTML, invoice) {
+        const invoiceDisplay = document.getElementById("invoiceDisplay");
+        const invoiceGenerated = document.getElementById("invoiceGenerated");
 
-        // Also show a console log for debugging
-        console.log(`Email sent to: ${email} with Invoice #${invoiceNumber}`);
+        if (invoiceGenerated) invoiceGenerated.innerHTML = invoiceHTML;
+        if (invoiceDisplay) invoiceDisplay.style.display = "flex";
+
+        console.log("Recently created invoice:", invoice);
     }
 
-    // Generate and ship invoice
-    function generateAndShipInvoice(shippingInfo, cartItems, totalCost) {
+    // -------------------------------
+    // INVOICE GENERATION
+    // -------------------------------
+    function generateAndEmailInvoice(paymentMethodInfo, cartItems, totalCost) {
         const subtotal = totalCost;
         const taxes = calculateTaxes(subtotal);
         const totalWithTax = subtotal + taxes;
-        
-        // Use provided invoice number/TRN or generate new ones
-        const finalInvoiceNumber = shippingInfo.invoiceNumber || generateInvoiceNumber();
-        const finalTRN = shippingInfo.trn || generateTRN();
-        const finalInvoiceDate = shippingInfo.invoiceDate || new Date().toLocaleString();
-        
+        const finalInvoiceNumber = getNextInvoiceNumber();
+        const finalTRN = paymentMethodInfo.trn || "UNKNOWN";
+        const finalInvoiceDate = new Date().toLocaleString();
+
+        // Build purchased items list
         const purchasedItems = cartItems.map(gameId => {
             const game = games.find(g => g.id === gameId);
             return {
-                name: game.title,
+                name: game?.title || "Unknown item",
                 quantity: 1,
-                price: game.price,
+                price: game?.price || "$0.00",
                 discount: "$0.00",
-                total: game.price
+                total: game?.price || "$0.00"
             };
         });
-        
-        // Create invoice object
+
+        // Invoice object
         const invoice = {
             invoiceNumber: finalInvoiceNumber,
             trn: finalTRN,
             companyName: "D.E.W Store",
             date: finalInvoiceDate,
-            shippingInfo: {
-                name: shippingInfo.name,
-                address: shippingInfo.address,
-                zip: shippingInfo.zip,
-                email: shippingInfo.email
-            },
-            purchasedItems: purchasedItems,
+            purchasedItems,
             subtotal: `$${subtotal.toFixed(2)}`,
             taxes: `$${taxes.toFixed(2)}`,
             totalCost: `$${totalWithTax.toFixed(2)}`,
             timestamp: new Date().toISOString()
         };
-        
-        // Save to localStorage
+
+        // Save invoice
         saveInvoiceToStorage(invoice);
-        
-        // Create the invoice HTML for display
+
+        // Build invoice HTML (popup content)
         const invoiceHTML = `
-            <div class="invoice">
+                        <div class="invoice">
                 <div class="invoice-header">
                     <h2>D.E.W Store</h2>
                     <h3>TAX INVOICE</h3>
@@ -221,22 +214,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="detail-row">
                         <span class="detail-label">Date of Invoice:</span>
                         <span class="detail-value">${finalInvoiceDate}</span>
-                    </div>
-                </div>
-                
-                <div class="shipping-info">
-                    <h4>Shipping Information</h4>
-                    <div class="detail-row">
-                        <span class="detail-label">Name:</span>
-                        <span class="detail-value">${shippingInfo.name}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Address:</span>
-                        <span class="detail-value">${shippingInfo.address}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Email:</span>
-                        <span class="detail-value">${shippingInfo.email}</span>
                     </div>
                 </div>
                 
@@ -288,123 +265,91 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             </div>
         `;
-        
-        // Display invoice
-        const invoiceDisplay = document.getElementById("invoiceDisplay");
-        const invoiceGenerated = document.getElementById("invoiceGenerated");
-        
-        if (invoiceGenerated) {
-            invoiceGenerated.innerHTML = invoiceHTML;
-        }
-        
-        if (invoiceDisplay) {
-            invoiceDisplay.style.display = "flex";
-        }
-        
-        // Show email sent message (using alert for reliability)
-        showEmailSentMessage(shippingInfo.email, finalInvoiceNumber);
-        
+
+        // Show popup
+        showRecentInvoice(invoiceHTML, invoice);
+
+        // Trigger email (mailto link)
+        showEmailSentMessage(paymentMethodInfo.email, finalInvoiceNumber);
+
         return invoice;
     }
 
-    // Validate form fields
+    // -------------------------------
+    // FORM VALIDATION
+    // -------------------------------
     function validatePaymentForm() {
         const paymentMethod = document.getElementById("paymentMethodDesktop")?.value || document.getElementById("paymentMethodMobile")?.value;
-        
+
         if (!paymentMethod || paymentMethod === "" || paymentMethod === "selected") {
             alert("Please select a payment method.");
             return false;
         }
-        
-        if (paymentMethod === "creditCard") {
-            const required = ["creditCardName", "creditCardBillingAddress", "creditCardCity", "creditCardBillingZip", "creditCardTRN", "creditCardInvoiceDate", "creditCardInvoiceNumber", "creditCardEmail"];
-            for (let id of required) {
-                if (!document.getElementById(id)?.value) {
-                    alert("Please fill in all credit card fields.");
-                    return false;
-                }
-            }
-        } else if (paymentMethod === "debitCard") {
-            const required = ["debitCardName", "debitCardBillingAddress", "debitCardCity", "debitCardBillingZip", "debitCardTRN", "debitCardInvoiceDate", "debitCardInvoiceNumber", "debitCardEmail"];
-            for (let id of required) {
-                if (!document.getElementById(id)?.value) {
-                    alert("Please fill in all debit card fields.");
-                    return false;
-                }
-            }
-        } else if (paymentMethod === "paypal") {
-            const required = ["paypalFname", "paypalLname", "paypalAddress", "paypalCity", "paypalZip", "paypalTRN", "paypalInvoiceDate", "paypalInvoiceNumber", "paypalEmail"];
-            for (let id of required) {
-                if (!document.getElementById(id)?.value) {
-                    alert("Please fill in all PayPal fields.");
-                    return false;
-                }
+
+        const requiredFields = {
+            creditCard: ["creditCardName", "creditCardNumber", "creditCardExpiration", "creditCardEmail"],
+            debitCard: ["debitCardName", "debitCardNumber", "debitCardExpiration", "debitCardEmail"],
+            paypal: ["paypalEmail"]
+        };
+
+        for (let id of requiredFields[paymentMethod] || []) {
+            if (!document.getElementById(id)?.value) {
+                alert(`Please fill in all ${paymentMethod} fields.`);
+                return false;
             }
         }
-        
+
         return true;
     }
-
-    // Process order and generate invoice
+    // -------------------------------
+    // ORDER PROCESSING
+    // -------------------------------
     function processOrder() {
+        // Prevent placing an order with an empty cart
         if (cart.length === 0) {
             alert("Your cart is empty!");
             return;
         }
-        
-        if (!validateForm()) {
-            return;
-        }
-        
+
+        // Validate payment form before proceeding
+        if (!validatePaymentForm()) return;
+
+        // Confirm with user before placing order
         if (!confirm("Are you sure you want to place the order?")) {
+            window.location.href = "games.html";
             return;
         }
-        
-        const shippingInfo = getShippingInfo();
+
+        // Collect payment info and calculate total
+        const paymentInfo = getPaymentMethodInfo();
         const total = updateTotal();
-        
-        // Generate and display invoice (also saves to localStorage)
-        generateAndShipInvoice(shippingInfo, [...cart], total);
-        
-        // Clear cart
+
+        // Generate invoice and show popup
+        generateAndEmailInvoice(paymentInfo, [...cart], total);
+
+        // Clear cart after successful order
         cart = [];
-        if (typeof saveCart === 'function') {
-            saveCart();
-        }
-        updateTotal();
-        
-        // Reset forms
+        if (typeof saveCart === 'function') saveCart();
+
+        // Reset checkout UI
+        if (cartContainer) cartContainer.innerHTML = "";
+        document.querySelectorAll("input").forEach(input => input.value = "");
+
+        // Reset payment method dropdowns
         const desktopSelect = document.getElementById("paymentMethodDesktop");
         const mobileSelect = document.getElementById("paymentMethodMobile");
         if (desktopSelect) desktopSelect.value = "creditCard";
         if (mobileSelect) mobileSelect.value = "creditCard";
         toggleForm();
-        
-        if (cartContainer) cartContainer.innerHTML = "";
-        
-        // Clear form fields
-        const allInputs = document.querySelectorAll("input");
-        allInputs.forEach(input => {
-            input.value = "";
-        });
     }
 
-    // Cancel button function
-    function goBackToCart() {
-        window.location.href = "cart.html";
-    }
-
-    // Event listeners for buttons and invoice
+    // Attach event listener to "Place Order" button
     const placeOrderButton = document.getElementById("placeOrder");
-    if (placeOrderButton) {
-        placeOrderButton.addEventListener("click", processOrder);
-    }
-    
-    const cancelButton = document.getElementById("cancelCheckout");
-    if (cancelButton) {
-        cancelButton.addEventListener("click", goBackToCart);
-    }
-    
+    if (placeOrderButton) placeOrderButton.addEventListener("click", processOrder);
+
+    // -------------------------------
+    // INVOICE POPUP CLOSE HANDLING
+    // -------------------------------
     const closeInvoiceBtn = document.getElementById("closeInvoice");
     if (closeInvoiceBtn) {
         closeInvoiceBtn.addEventListener("click", () => {
@@ -414,7 +359,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-    
+
+    // Allow closing popup by clicking outside invoice content
     window.addEventListener("click", (event) => {
         const invoiceDisplay = document.getElementById("invoiceDisplay");
         if (invoiceDisplay && event.target === invoiceDisplay) {

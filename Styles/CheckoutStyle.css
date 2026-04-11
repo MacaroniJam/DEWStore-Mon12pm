@@ -24,9 +24,7 @@ main {
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - 55px);
-
 }
-
 
 main h1 {
   display: block;
@@ -39,10 +37,7 @@ main h1 {
   background-color: rgb(4, 92, 180);
   font-weight: bold;
   margin-bottom: 20px;
-
 }
-
-
 
 main h2 {
   display: block;
@@ -63,8 +58,6 @@ main h2 {
   box-sizing: border-box;
 }
 
-
-
 /* Purchase summary */
 .purchase {
   flex: 1;
@@ -72,13 +65,14 @@ main h2 {
   flex-direction: column;
   gap: 25px;
   padding: 20px 10px;
-  background: linear-gradient(to bottom,
+  background: linear-gradient(
+    to bottom,
 
-      rgb(1, 69, 141),
-      rgb(0, 57, 122),
-      rgb(0, 45, 102),
-      rgb(0, 29, 82));
-
+    rgb(1, 69, 141),
+    rgb(0, 57, 122),
+    rgb(0, 45, 102),
+    rgb(0, 29, 82)
+  );
 
   border-right: 2px solid rgb(255, 255, 255);
 }
@@ -88,8 +82,6 @@ main h2 {
   margin: 0;
   background-color: transparent;
 }
-
-
 
 select {
   background-color: rgb(0, 9, 24);
@@ -126,7 +118,6 @@ select:focus {
   height: 30vh;
 }
 
-
 /* Individual cart item */
 .cart-item {
   display: flex;
@@ -137,7 +128,6 @@ select:focus {
   box-sizing: border-box;
   border-top: 1px solid rgba(255, 255, 255);
   border-bottom: 1px solid rgba(255, 255, 255);
-
 }
 
 .cart-item h3 {
@@ -180,7 +170,180 @@ select:focus {
   padding: 20px 10px;
   justify-content: space-between;
   box-sizing: border-box;
+}
 
+.invoice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.invoice-search {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+  min-width: 220px;
+}
+
+.invoice-search input {
+  flex: 1;
+  min-width: 140px;
+}
+
+.invoice-list {
+  width: calc(100% - 40px);
+  max-width: 1100px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 10px;
+}
+
+.invoice-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  padding: 18px 22px;
+  color: white;
+}
+
+.invoice-card h3 {
+  margin: 0 0 10px;
+  font-family: NeueHaasDisplayMedium;
+  letter-spacing: 0.4px;
+}
+
+.invoice-card p {
+  margin: 6px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.invoice-container {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+}
+
+.invoice-content {
+  position: relative;
+  width: min(100%, 960px);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: rgba(7, 32, 65, 0.98);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.close-invoice {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: transparent;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.invoice {
+  color: white;
+  font-family: NeueHaasDisplayRoman;
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.invoice-header h2,
+.invoice-header h3 {
+  margin: 0;
+}
+
+.invoice-details,
+.invoice-totals {
+  margin-top: 20px;
+  display: grid;
+  gap: 12px;
+}
+
+.detail-row,
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.detail-label,
+.total-label {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.detail-value,
+.total-value {
+  font-weight: 600;
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 22px;
+}
+
+.invoice-table th,
+.invoice-table td {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 14px 12px;
+  font-size: 14px;
+}
+
+.invoice-table th {
+  background: rgba(255, 255, 255, 0.08);
+  font-family: NeueHaasDisplayMedium;
+}
+
+.invoice-table td {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.invoice-footer {
+  margin-top: 22px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 768px) {
+  .invoice-content {
+    padding: 18px;
+    width: 100%;
+  }
+
+  .invoice-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .invoice-table th,
+  .invoice-table td {
+    padding: 10px 8px;
+    font-size: 12px;
+  }
 }
 
 /* Total row */
@@ -208,8 +371,6 @@ button {
 .mobile-only {
   display: none;
 }
-
-
 
 /* Form Styles - Enhanced with Vertical Layout */
 form {
@@ -256,9 +417,6 @@ label {
   letter-spacing: 0.5px;
 }
 
-
-
-
 /* Wider input boxes with better visibility */
 input {
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -290,7 +448,6 @@ input::placeholder {
   font-size: 15px;
 }
 
-
 /* Form animation */
 .purchase form {
   animation: fadeIn 0.3s ease-in-out;
@@ -307,7 +464,6 @@ input::placeholder {
     transform: translateY(0);
   }
 }
-
 
 /* Responsive styles */
 @media only screen and (max-width: 768px) {
@@ -355,7 +511,6 @@ input::placeholder {
   }
 
   input {
-
     padding: 12px 15px;
     font-size: 15px;
     min-width: auto;
@@ -371,11 +526,13 @@ input::placeholder {
   }
 
   .order-summary {
-    background: linear-gradient(to bottom,
-        rgb(1, 69, 141),
-        rgb(0, 57, 122),
-        rgb(0, 45, 102),
-        rgb(0, 29, 82));
+    background: linear-gradient(
+      to bottom,
+      rgb(1, 69, 141),
+      rgb(0, 57, 122),
+      rgb(0, 45, 102),
+      rgb(0, 29, 82)
+    );
     border-right: none;
     border-top: 2px solid rgb(255, 255, 255);
     margin-bottom: 0;
@@ -395,6 +552,5 @@ input::placeholder {
     gap: 10px;
     justify-content: space-between;
     margin-top: 30px;
-
   }
 }

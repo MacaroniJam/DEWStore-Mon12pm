@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const toggleNewPassword = document.getElementById("toggleNewPassword");
     const toggleConfirmNewPassword = document.getElementById("toggleConfirmNewPassword");
 
+    // Toggles password visibility for the reset password form fields.
     toggleNewPassword.addEventListener("click", () => {
         const type = newPasswordInput.type === "password" ? "text" : "password";
         newPasswordInput.type = type;
@@ -17,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// Finds the matching TRN and updates that account's password.
 function resetPassword(event) {
     event.preventDefault();
 
@@ -28,9 +30,11 @@ function resetPassword(event) {
             return false;
         }
 
+        // Gets the TRN and new password values entered by the visitor.
         const trn = document.getElementById("trn").value.trim();
         const newPassword = document.getElementById("newPassword").value;
         const confirmNewPassword = document.getElementById("confirmNewPassword").value;
+        // Looks for the account that matches the entered TRN.
         const registrationData = getRegistrationData();
         const registeredUser = registrationData.find((record) => record.trn === trn);
 
@@ -49,6 +53,7 @@ function resetPassword(event) {
             return false;
         }
 
+        // Saves the new password for the matched registration record.
         registeredUser.password = newPassword;
         saveRegistrationData(registrationData);
         sessionStorage.removeItem("loginAttempts");
