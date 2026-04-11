@@ -1,17 +1,11 @@
-/*
-    Figure 5 Checkout Javascript
-    Show a summary of the shopping cart with the total cost.
-    Allow the user to enter their shipping details (e.g., name, address, amount being paid).
-    When the user confirms the checkout, generate an invoice. 
-    Include:
-    Confirm button (confirms the checkout)
-*/
+
 document.addEventListener("DOMContentLoaded", () => {
     // -------------------------------
     // CART DISPLAY
     // -------------------------------
     const cartContainer = document.getElementById("cartContainer");
 
+    /*Question 4. Checkout Page: Show a summary of the shopping cart with the total cost. */
     // Show all items currently in the cart
     cart.forEach(gameId => {
         const game = games.find(g => g.id === gameId);
@@ -135,12 +129,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // -------------------------------
     // INVOICE STORAGE
     // -------------------------------
+    // 4. Checkout Page: When the user confirms the checkout, generate an invoice. 
+
     function saveInvoiceToStorage(invoice) {
         let allInvoices = JSON.parse(localStorage.getItem("AllInvoices")) || [];
         allInvoices.push(invoice);
         localStorage.setItem("AllInvoices", JSON.stringify(allInvoices));
         return allInvoices;
     }
+
 
     // -------------------------------
     // INVOICE POPUP DISPLAY
