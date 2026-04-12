@@ -132,10 +132,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // 4. Checkout Page: When the user confirms the checkout, generate an invoice. 
 
     function saveInvoiceToStorage(invoice) {
-        let allInvoices = JSON.parse(localStorage.getItem("AllInvoices")) || [];
-        allInvoices.push(invoice);
-        localStorage.setItem("AllInvoices", JSON.stringify(allInvoices));
-        return allInvoices;
+        let AllInvoices = JSON.parse(localStorage.getItem("AllInvoices")) || [];
+        AllInvoices.push(invoice);
+        localStorage.setItem("AllInvoices", JSON.stringify(AllInvoices));
+        return AllInvoices;
     }
 
 
@@ -155,6 +155,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // -------------------------------
     // INVOICE GENERATION
     // -------------------------------
+    /*Question 5. Invoice Generation:
+        a. After checkout, generate an invoice with the following details:
+            `Name of company`
+            `Date of invoice`
+            `Shipping information` (from checkout)
+            `Invoice number` (unique)`
+            ‘trn’
+            `Purchased items` (name, quantity, price, discount)
+            `Taxes`
+            `Subtotal`
+            `Total cost`
+        b. Append this invoice to the user’s array of invoices (array of objects). Also store the invoice to localStorage with the key called AllInvoices (as an array of objects) to access later.
+        After generating the invoice
+        
+        c. Optionally, display a message indicating that the invoice has been “sent” to the user’s email.
+*/
     function generateAndEmailInvoice(paymentMethodInfo, cartItems, totalCost) {
         const subtotal = totalCost;
         const taxes = calculateTaxes(subtotal);
@@ -174,6 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 total: game?.price || "$0.00"
             };
         });
+
 
         // Invoice object
         const invoice = {
@@ -226,9 +243,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     </thead>
                     <tbody>
                         ${purchasedItems.map(item => {
-                            const itemPrice = parseFloat(item.price.replace("$", ""));
-                            const itemTotal = itemPrice * item.quantity;
-                            return `
+            const itemPrice = parseFloat(item.price.replace("$", ""));
+            const itemTotal = itemPrice * item.quantity;
+            return `
                                 <tr>
                                     <td>${item.name}</td>
                                     <td>${item.quantity}</td>
@@ -237,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <td>$${itemTotal.toFixed(2)}</td>
                                 </tr>
                             `;
-                        }).join('')}
+        }).join('')}
                     </tbody>
                 </table>
                 
@@ -326,7 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cart = [];
         saveCart();
         updateTotal();
-        
+
 
         // Reset checkout UI
         if (cartContainer) cartContainer.innerHTML = "";

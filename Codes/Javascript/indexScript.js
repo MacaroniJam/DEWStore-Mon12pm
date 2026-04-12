@@ -40,6 +40,7 @@ function login(event) {
         const registrationData = getRegistrationData();
         const registeredUser = registrationData.find((record) => record.trn === trn && record.password === password);
 
+
         if (!registeredUser) {
             // Question 1a iii. Track failed attempts and lock after three tries.
             const attempts = Number(sessionStorage.getItem("loginAttempts")) || 0;
@@ -60,6 +61,8 @@ function login(event) {
         const displayName = [registeredUser.firstName, registeredUser.lastName].filter(Boolean).join(" ") || registeredUser.trn;
         sessionStorage.setItem("currentTRN", registeredUser.trn);
         SetUsername(displayName);
+        /*Question 6c. GetUserInvoices() – displays all the invoices for a user based on trn stored in the localStorage key called, RegisterData. */
+        localStorage.setItem("RegisterData", registeredUser.trn)
         window.location.href = 'games.html';
         return true;
     } catch (error) {

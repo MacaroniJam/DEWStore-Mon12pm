@@ -37,48 +37,6 @@ main h1 {
   margin-bottom: 20px;
 }
 
-/* Controls (buttons + search bar) */
-.invoice-controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 20px;
-  width: 100%;
-  max-width: 900px;
-  justify-content: space-between;
-}
-
-.invoice-controls button {
-  background-color: rgb(2, 79, 161);
-  color: white;
-  font-family: NeueHaasDisplayMedium;
-  border: none;
-  padding: 10px 20px;
-  font-size: clamp(16px, 2vw, 20px);
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-.invoice-search {
-  display: flex;
-  gap: 10px;
-  flex: 1;
-  min-width: 220px;
-}
-
-.invoice-search input {
-  flex: 1;
-  padding: 10px 14px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(0, 9, 24, 0.9);
-  color: white;
-  font-family: NeueHaasDisplayRoman;
-}
-
-.invoice-search input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
 
 /* Invoice list container */
 .invoice-list {
@@ -117,9 +75,6 @@ main h1 {
     align-items: stretch;
   }
 
-  .invoice-search {
-    flex-direction: column;
-  }
 
   .invoice-card {
     padding: 16px;

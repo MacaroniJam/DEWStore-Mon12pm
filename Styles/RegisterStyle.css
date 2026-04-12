@@ -55,8 +55,9 @@ body {
 
     align-items: stretch;
     background-color: rgb(23, 26, 33);
-    width: 70%;
+    width: 90%;
     margin-top: 65px;
+    height: auto;
 
 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -160,18 +161,15 @@ button {
     justify-content: center;
     padding: 20px 20px;
 
+
 }
 
-/* Side image */
 .sideImage img {
-    height: auto;
+    max-height: 2400px; /* or any value you want */
+    width: auto;
+    border-radius: 10px;
     display: block;
-
-    width:400px;
-    object-fit: contain;
-    box-sizing: border-box;
-
-
+    
 }
 
 /* Password field with toggle */
