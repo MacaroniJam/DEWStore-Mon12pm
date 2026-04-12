@@ -38,10 +38,15 @@ function login(event) {
         const trn = document.getElementById("trn").value.trim();
         const password = document.getElementById("password").value;
         const registrationData = getRegistrationData();
-        const registeredUser = registrationData.find((record) => record.trn === trn && record.password === password);
-
+        const registeredUser = registrationData.find((record) => record.trn === trn);
 
         if (!registeredUser) {
+            sessionStorage.removeItem("loginAttempts");
+            alert("No account was found for that TRN. Please register first.");
+            return false;
+        }
+
+        if (registeredUser.password !== password) {
             // Question 1a iii. Track failed attempts and lock after three tries.
             const attempts = Number(sessionStorage.getItem("loginAttempts")) || 0;
             const updatedAttempts = attempts + 1;
@@ -52,7 +57,7 @@ function login(event) {
                 return false;
             }
 
-            alert("Invalid TRN or password. You have " + (3 - updatedAttempts) + " attempt(s) remaining.");
+            alert("Incorrect password. You have " + (3 - updatedAttempts) + " attempt(s) remaining.");
             return false;
         }
 
