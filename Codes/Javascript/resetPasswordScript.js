@@ -18,7 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Finds the matching TRN and updates that account's password.
+/* Question 1a. Login Page
+   Reset Password hyperlink used to change the password in RegistrationData
+   by matching the visitor's TRN.
+*/
 function resetPassword(event) {
     event.preventDefault();
 
@@ -30,11 +33,11 @@ function resetPassword(event) {
             return false;
         }
 
-        // Gets the TRN and new password values entered by the visitor.
+        // Question 1a Reset Password. Get the entered TRN and new password values.
         const trn = document.getElementById("trn").value.trim();
         const newPassword = document.getElementById("newPassword").value;
         const confirmNewPassword = document.getElementById("confirmNewPassword").value;
-        // Looks for the account that matches the entered TRN.
+        // Question 1a Reset Password. Find the record that matches the entered TRN.
         const registrationData = getRegistrationData();
         const registeredUser = registrationData.find((record) => record.trn === trn);
 
@@ -53,7 +56,7 @@ function resetPassword(event) {
             return false;
         }
 
-        // Saves the new password for the matched registration record.
+        // Question 1a Reset Password. Save the updated password to RegistrationData.
         registeredUser.password = newPassword;
         saveRegistrationData(registrationData);
         sessionStorage.removeItem("loginAttempts");

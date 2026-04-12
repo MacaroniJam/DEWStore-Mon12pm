@@ -4,7 +4,9 @@ var loggedIn = sessionStorage.getItem("loggedIn") === "true";
 
 let usernameDiv = null;
 
-// Reads all saved registration records from localStorage.
+/* Question 1. User Authentication (LocalStorage)
+   Shared RegistrationData functions used by registration, login, and reset password.
+*/
 function getRegistrationData() {
     const storedRegistrationData = localStorage.getItem("RegistrationData");
 
@@ -21,7 +23,7 @@ function getRegistrationData() {
     return registrationData;
 }
 
-// Saves the full registration record list back to localStorage.
+// Saves the updated RegistrationData array back to localStorage.
 function saveRegistrationData(registrationData) {
     localStorage.setItem("RegistrationData", JSON.stringify(registrationData));
 }
@@ -45,7 +47,7 @@ var cart = JSON.parse(localStorage.getItem("cart")) || [];
         iv. `image`
 */
 // List of games shown in games page
-const games =[
+const games = [
     {
         id: "COE33",
         image: "../Assets/Images/COE33Cover.png",
@@ -97,7 +99,7 @@ const games =[
         description: "Lies of P is a thrilling soulslike that takes the story of Pinocchio, turns it on its head, and sets it against the darkly elegant backdrop of the Belle Epoque era.",
         genres: ["Action RPG", "Souls-like", "Dark Fantasy"]
     }
-    
+
 
 ];
 
@@ -108,8 +110,7 @@ var AllProducts = localStorage.getItem("AllProducts") ? JSON.parse(localStorage.
 localStorage.setItem("AllProducts", JSON.stringify(games));
 
 /*Question 2c. Display the product list dynamically on the website.*/
-function updateGames()
-{
+function updateGames() {
     if (AllProducts.length !== games.length) {
         games = gamesList;
         localStorage.setItem("AllProducts", JSON.stringify(games));
@@ -141,7 +142,7 @@ const slides = [
         image: "../Assets/Images/RE9Promo.jpg",
         text: "The long awaited sequel to the Resident Evil franchise, Resident Evil: Requiem, out now!"
     }
-]; 
+];
 
 
 // Navbar update function based on login staus
@@ -152,7 +153,7 @@ function updateNav() {
             <a href="cart.html">Cart</a>
             <a href="checkout.html">Checkout</a>
             <a href="invoices.html">Invoices</a>
-            <a href="aboutus.html">About Us</a>
+            <a href="dashboard.html">Dashboard</a>
             <a href="#" id="logout">Logout</a>
         `;
         navLinks.style.marginLeft = "20px";
@@ -171,7 +172,7 @@ function updateNav() {
         logoutBtn.addEventListener("click", (e) => {
             e.preventDefault();
 
-            
+
             sessionStorage.removeItem("username");
             sessionStorage.removeItem("loggedIn");
             sessionStorage.removeItem("currentTRN");
@@ -187,7 +188,7 @@ function updateNav() {
             <a href="index.html">Login</a>
             <a href="register.html">Register</a>
             <a href="games.html">Games</a>
-            <a href="aboutus.html">About Us</a>
+            <a href="dashboard.html">Dashboard</a>
         `;
         navLinks.style.marginLeft = "auto";
 
@@ -199,7 +200,9 @@ function updateNav() {
 }
 
 function SetUsername(name) {
-    // Stores the display name used in the header after login.
+    /* Question 1a. Login Page
+       Shows the logged-in user's first and last name in the top corner.
+    */
     username = name;
     sessionStorage.setItem("username", name);
     sessionStorage.setItem("loggedIn", "true");
@@ -263,6 +266,38 @@ function removeFromCart(gameId) {
     cart = cart.filter(id => id !== gameId);
     saveCart();
 }
+
+function calculateAge(dateOfBirth) {
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    return age;
+}
+
+/*Question 6b. ShowInvoices() - displays all invoices and allow the visitor to search for any of the invoices 
+(using trn) stored in AllInvoices from localStorage using console.log(). */
+function ShowInvoices(query) {
+    const allInvoices = JSON.parse(localStorage.getItem("AllInvoices")) || [];
+
+    if (query) {
+        const filteredInvoices = allInvoices.filter(invoice => invoice.trn === query);
+        if (filteredInvoices.length > 0) {
+            console.log(`Invoices matching TRN "${query}":`, filteredInvoices);
+        } else {
+            console.log(`No invoices found with TRN "${query}".`);
+        }
+    } else {
+        console.log("All registered invoices:", allInvoices);
+    }
+}
+
+
 
 
 

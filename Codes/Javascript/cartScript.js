@@ -1,4 +1,3 @@
-
 /*Question 2ei1. Shopping cart must include, product details along with the taxes, discounts, subtotal and current total cost. */
 document.addEventListener("DOMContentLoaded", () => {
     // Placing all cart items in the checkout page by looping through cart and creating elements for each game in the cart

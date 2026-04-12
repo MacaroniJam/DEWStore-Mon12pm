@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>D.E.W Store</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../Assets/Images/raindrop.png" type="image/x-icon">
+        <link rel="stylesheet" href="../Styles/DashboardStyle.css" type="text/css">
+        <link rel="stylesheet" href="../Styles/NavBarStyle.css" type="text/css">
+        <script src="Javascript/mainScript.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
+        <script src="Javascript/dashboardScript.js" defer></script>
+
+        
+    </head>
+
+    <body>
+        <header>
+            <div>
+                <img src="../Assets/Images/DEWLogo.png" alt="D.E.W Store Logo">
+                <h1>D.E.W Store</h1>
+
+            </div>
+
+            <nav id="nav-links">
+
+            </nav>
+            
+
+        </header>
+
+        <main>
+            <h1>DASHBOARD</h1>
+            <h2>Thank you all for using D.E.W Store!</h2>
+
+            <h3>Gender Distribution</h3>
+            <section class="genderCount">
+                <!--Question 6a. ShowUserFrequency() – Show’s user frequency based on Gender and Age Group: Display this data on a dashboard or a separate page. -->
+                <canvas id="genderChart" style="width:100%;max-width:700px"></canvas>
+            </section>
+
+            <h3>Age Distribution</h3>
+            <section class="ageCount">
+                <!--Question 6a. ShowUserFrequency() – Show’s user frequency based on Gender and Age Group: Display this data on a dashboard or a separate page. -->
+                <canvas id="ageChart" style="width:100%;max-width:700px"></canvas>
+            </section>
+
+            
+        </main>
+        
+
+
+    </body>
+
+</html>

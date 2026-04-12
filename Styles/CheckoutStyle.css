@@ -233,23 +233,26 @@ select:focus {
 }
 
 .invoice-content {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  
   width: min(100%, 960px);
   max-height: 90vh;
   overflow-y: auto;
   background: rgba(7, 32, 65, 0.98);
   border-radius: 20px;
-  padding: 28px;
+  padding: 0 28px 28px 28px;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .close-invoice {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 42px;
-  height: 42px;
+  margin-left: auto;
+  text-align: center;
+
+  margin-top: 10px;
+  margin-bottom: 5px;
+
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 50%;
   background: transparent;
@@ -328,23 +331,7 @@ select:focus {
   font-size: 14px;
 }
 
-@media only screen and (max-width: 768px) {
-  .invoice-content {
-    padding: 18px;
-    width: 100%;
-  }
 
-  .invoice-header {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .invoice-table th,
-  .invoice-table td {
-    padding: 10px 8px;
-    font-size: 12px;
-  }
-}
 
 /* Total row */
 .order-total {
@@ -381,6 +368,22 @@ form {
   padding: 25px;
   margin-top: 15px;
   border: 1px solid rgba(255, 255, 255, 0.15);
+  animation: fadeIn 0.3s ease-in-out;
+  height: 30vh;
+  overflow-y: auto;
+
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .purchase form h1 {
@@ -448,22 +451,6 @@ input::placeholder {
   font-size: 15px;
 }
 
-/* Form animation */
-.purchase form {
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 /* Responsive styles */
 @media only screen and (max-width: 768px) {
@@ -548,9 +535,25 @@ input::placeholder {
 
   .purchase div {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 10px;
-    justify-content: space-between;
     margin-top: 30px;
   }
+
+  .invoice-content {
+    padding: 18px;
+    width: 100%;
+  }
+
+  .invoice-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .invoice-table th,
+  .invoice-table td {
+    padding: 10px 8px;
+    font-size: 12px;
+  }
 }
+
