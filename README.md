@@ -83,10 +83,10 @@ This removes:
 ## Group Members 
 
 | Name | ID# |
-| Joel | 2300087 |
-| Jaydon | 2210144 |
+| Joel Henry | 2300087 |
+| Jaydon Hylton | 2210144 |
 | Stephen Morgan | 2306623 |
-| Micah Lindo | 2 |
+| Micah Lindo | 2505275 |
 
 ## Frameworks And Tools Used
 
