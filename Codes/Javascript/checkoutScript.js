@@ -265,9 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Show popup
         showRecentInvoice(invoiceHTML, invoice);
-
-        // Trigger email (mailto link)
-        showEmailSentMessage(paymentMethodInfo.email, finalInvoiceNumber);
+        alert("Invoice generated and emailed to you!");
 
         return invoice;
     }
@@ -326,7 +324,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Clear cart after successful order
         cart = [];
-        if (typeof saveCart === 'function') saveCart();
+        saveCart();
+        updateTotal();
+        
 
         // Reset checkout UI
         if (cartContainer) cartContainer.innerHTML = "";
