@@ -1,4 +1,9 @@
-/*Joel Henry 2300087*/
+/*     Name            |        ID Number
+//------------------------------------------
+// Joel Henry          |         2300087
+// Stephen Morgan      |         2306623                  
+// Micah Lindo         |         2505275
+*/
 document.addEventListener("DOMContentLoaded", () => {
     // -------------------------------
     // CART DISPLAY

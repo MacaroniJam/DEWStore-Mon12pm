@@ -1,4 +1,8 @@
-/*Joel Henry 2300087*/
+/*     Name            |        ID Number
+//------------------------------------------
+// Joel Henry          |         2300087
+// Stephen Morgan      |         2306623                  
+*/
 /*Question 6c. GetUserInvoices() – displays all the invoices for a user based on trn stored in the localStorage key called, RegisterData. */
     function GetUserInvoices() {
         const trn = localStorage.getItem("RegisterData");

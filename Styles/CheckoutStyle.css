@@ -1,4 +1,10 @@
-/*Joel Henry 2300087*/
+/*     Name            |        ID Number
+//------------------------------------------
+// Joel Henry          |         2300087
+// Stephen Morgan      |         2306623                  
+// Micah Lindo         |         2505275
+*/
+
 @font-face {
   font-family: NeueHaasDisplayMedium;
   src: url(../Assets/Fonts/NeueHaasDisplayMedium.ttf);
@@ -236,7 +242,7 @@ select:focus {
 .invoice-content {
   display: flex;
   flex-direction: column;
-  
+
   width: min(100%, 960px);
   max-height: 90vh;
   overflow-y: auto;
@@ -332,8 +338,6 @@ select:focus {
   font-size: 14px;
 }
 
-
-
 /* Total row */
 .order-total {
   display: flex;
@@ -372,7 +376,6 @@ form {
   animation: fadeIn 0.3s ease-in-out;
   height: 30vh;
   overflow-y: auto;
-
 }
 
 @keyframes fadeIn {
@@ -451,7 +454,6 @@ input::placeholder {
   color: rgba(255, 255, 255, 0.5);
   font-size: 15px;
 }
-
 
 /* Responsive styles */
 @media only screen and (max-width: 768px) {
@@ -557,4 +559,3 @@ input::placeholder {
     font-size: 12px;
   }
 }
-
