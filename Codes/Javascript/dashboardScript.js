@@ -1,3 +1,4 @@
+/*Joel Henry 2300087*/
 /*Question 6a. ShowUserFrequency() – Show’s user frequency based on Gender and Age Group:
 show how many registered users fall under specific gender categories (e.g. Male, Female, Other)*/
 const users = getRegistrationData();

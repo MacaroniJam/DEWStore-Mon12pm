@@ -181,6 +181,8 @@ function updateNav() {
             username = null;
 
             window.location.replace("index.html");
+
+            localStorage.setItem("RegisterData", null);
         });
 
     } else {
@@ -283,6 +285,11 @@ function calculateAge(dateOfBirth) {
 /*Question 6b. ShowInvoices() - displays all invoices and allow the visitor to search for any of the invoices 
 (using trn) stored in AllInvoices from localStorage using console.log(). */
 function ShowInvoices(query) {
+    const trn = localStorage.getItem("RegisterData");
+    if (trn !== '123-456-789'){
+        console.log("Please log in to view invoices.");
+        return;
+    }
     const allInvoices = JSON.parse(localStorage.getItem("AllInvoices")) || [];
 
     if (query) {

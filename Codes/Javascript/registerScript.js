@@ -1,3 +1,4 @@
+/*Joel Henry 2300087*/
 document.addEventListener("DOMContentLoaded", () => {
     const passwordInput = document.getElementById("password");
     const eye = document.getElementById("togglePassword");

@@ -1,3 +1,4 @@
+/*Joel Henry 2300087*/
 document.addEventListener("DOMContentLoaded", () => {
     // Get game ID from URL and display game details
     const params = new URLSearchParams(window.location.search);

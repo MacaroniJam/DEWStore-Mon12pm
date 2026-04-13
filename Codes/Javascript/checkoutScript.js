@@ -1,4 +1,4 @@
-
+/*Joel Henry 2300087*/
 document.addEventListener("DOMContentLoaded", () => {
     // -------------------------------
     // CART DISPLAY

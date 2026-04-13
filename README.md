@@ -51,6 +51,9 @@ If you need sample values for testing, you can use something like:
 - TRN: `123-456-789`
 - Password: `Password123`
 
+## Admin
+To utilize the admin function `ShowInvoices()` function ensure to register an account with the following TRN `123-456-789`
+
 ## Resetting Test Data
 
 Because the app stores data in the browser, previous test accounts, cart items, and invoices may remain between sessions.

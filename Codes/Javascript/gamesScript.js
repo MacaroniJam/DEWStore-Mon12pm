@@ -1,3 +1,4 @@
+/*Joel Henry 2300087*/
 /*Question 2c. Display the product list dynamically on the website.*/
 document.addEventListener("DOMContentLoaded", () => {
     const gameSlide = document.getElementById("GameSlide");
