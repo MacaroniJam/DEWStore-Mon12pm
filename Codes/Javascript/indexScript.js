@@ -1,3 +1,4 @@
+/* Jaydon Hylton ID 2210144 */
 /*Joel Henry 2300087*/
 document.addEventListener("DOMContentLoaded", () => {
     // Prevents logged in users from accessing login page using back button and redirects to games page instead

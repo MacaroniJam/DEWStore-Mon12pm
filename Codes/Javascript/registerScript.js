@@ -1,4 +1,5 @@
 /*Joel Henry 2300087*/
+/* Jaydon Hylton ID 2210144 */
 document.addEventListener("DOMContentLoaded", () => {
     const passwordInput = document.getElementById("password");
     const eye = document.getElementById("togglePassword");

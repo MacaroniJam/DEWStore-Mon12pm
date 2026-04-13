@@ -1,3 +1,4 @@
+/* Jaydon Hylton 2210144 */
 # D.E.W Store
 
 D.E.W Store is a browser-based video game storefront built with HTML5, CSS, and JavaScript. The project includes user registration and login, a game catalog, a shopping cart, checkout, invoice viewing, and a dashboard that summarizes registered users by gender and age group.

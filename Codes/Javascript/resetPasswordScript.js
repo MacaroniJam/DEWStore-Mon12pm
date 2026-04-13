@@ -1,3 +1,4 @@
+/* Jaydon Hylton 2210144 */
 document.addEventListener("DOMContentLoaded", () => {
     const newPasswordInput = document.getElementById("newPassword");
     const confirmNewPasswordInput = document.getElementById("confirmNewPassword");
